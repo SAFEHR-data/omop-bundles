@@ -3,12 +3,12 @@ library(omopbundles)
 library(testthat)
 
 
-test_that("available_bundles is not empty",{
+test_that("available_bundles is not empty", {
   result <- available_bundles()
   expect_true(nrow(result) > 0, info = "The dataframe should not be empty")
 })
 
-test_that("Smoking exists as an observation",{
+test_that("Smoking exists as an observation", {
   result <- available_bundles() |>
     dplyr::filter(concept_name == "smoking")
 
@@ -17,7 +17,7 @@ test_that("Smoking exists as an observation",{
 })
 
 
-test_that("Avilable bundles and concept_by_bundle play nicely together",{
+test_that("Avilable bundles and concept_by_bundle play nicely together", {
   smoking_bundle <- available_bundles() |>
     dplyr::filter(concept_name == "smoking")
 

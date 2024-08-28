@@ -11,18 +11,19 @@
 #' @export
 available_bundles <- function(version = "latest") {
   raw_dir <- .get_raw_dir()
-  directories <- list.dirs(raw_dir, full.names=TRUE)
+  directories <- list.dirs(raw_dir, full.names = TRUE)
   domain_directories <- directories[directories != raw_dir]
 
   purrr::map_dfr(domain_directories, .build_concepts_from_directory)
 }
 
 .get_raw_dir <- function(...) {
-  system.file("data", "raw", ..., package = "omopbundles", mustWork=TRUE)
+  system.file("data", "raw", ..., package = "omopbundles", mustWork = TRUE)
 }
 
 .build_concepts_from_directory <- function(directory) {
   concept_files <- list.files(directory)
+  concept_name <- NULL
 
   dplyr::tibble(
     id = concept_files,
@@ -39,7 +40,7 @@ available_bundles <- function(version = "latest") {
 #' @param bundle_row Single row of a dataframe with a domain and id
 #' @return Dataframe with a concept_id and domain column
 #' @export
-concept_by_bundle <- function(bundle_row){
+concept_by_bundle <- function(bundle_row) {
   stopifnot(is.data.frame(bundle_row))
   stopifnot(nrow(bundle_row) == 1)
 
