@@ -305,6 +305,11 @@
       "Version": "7.3.2",
       "Source": "Repository"
     },
+    "testthat": {
+      "Package": "testthat",
+      "Version": "3.2.1.1",
+      "Source": "Repository"
+    },
     "tibble": {
       "Package": "tibble",
       "Version": "3.2.1",
