@@ -21,7 +21,7 @@ available_bundles <- function(version = "latest") {
 }
 
 .get_raw_dir <- function(...) {
-  system.file("data", "raw", ..., package = "omopbundles", mustWork = TRUE)
+  system.file("data-raw", ..., package = "omopbundles", mustWork = TRUE)
 }
 
 .build_concepts_from_directory <- function(directory) {
