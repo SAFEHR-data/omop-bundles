@@ -2,13 +2,16 @@
 #' @importFrom purrr map_dfr
 #' @importFrom readr read_csv
 
-#' Get available bundles for a version
+#' @title Get available bundles for a version
 #'
-#' If a bundle has multiple names, then the id will be duplicated across rows
+#' @description If a bundle has multiple names, then the id will be duplicated across rows
 #'
 #' @param version Requested version, if not defined, the latest will be used
 #' @return dataframe that contains a concept_name and a domain column for each available concept
 #' @export
+#' @examples
+#' available_bundles()
+#' available_bundles('0.1')
 available_bundles <- function(version = "latest") {
   raw_dir <- .get_raw_dir()
   directories <- list.dirs(raw_dir, full.names = TRUE)
@@ -34,8 +37,7 @@ available_bundles <- function(version = "latest") {
     dplyr::mutate(concept_name = gsub("_", " ", concept_name))
 }
 
-#' Get concepts for a a single bundle row
-#'
+#' @title Get concepts for a a single bundle row
 #'
 #' @param bundle_row Single row of a dataframe with a domain and id
 #' @return Dataframe with a concept_id and domain column
