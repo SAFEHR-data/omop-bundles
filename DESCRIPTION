@@ -1,11 +1,18 @@
 Package: omopbundles
 Type: Package
-Title: What the Package Does (Title Case)
+Title: Bundles of OMOP Concepts for Ease of Data Selection
 Version: 0.1.0
-Author: Who wrote it
-Maintainer: The package maintainer <yourself@somewhere.net>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
-License: What license is it under?
+Author: person('Stef', 'Piatek', email = 'stefan.piatek@nhs.net', role = c('cre', 'aut'))
+Description: Bundles of OMOP Concepts for Ease of Data Selection
+License: Apache License (>= 2)
 Encoding: UTF-8
 LazyData: true
+Imports:
+  dplyr (>= 1.0),
+  purrr (>= 1.0),
+  readr (>= 2.0)
+Suggests:
+  usethis,
+  testthat (>= 3.0.0),
+  lintr
+Config/testthat/edition: 3
