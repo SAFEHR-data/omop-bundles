@@ -7,7 +7,7 @@
 #' @description If a bundle has multiple names, then the id will be duplicated across rows
 #'
 #' @param version Requested version, if not defined, the latest will be used
-#' @return dataframe that contains a concept_name and a domain column for each available concept
+#' @return dataframe that contains a "concept_name", "version" and a "domain" column for each available concept
 #' @export
 #' @examples
 #' available_bundles()
@@ -17,7 +17,8 @@ available_bundles <- function(version = "latest") {
   directories <- list.dirs(raw_dir, full.names = TRUE)
   domain_directories <- directories[directories != raw_dir]
 
-  purrr::map_dfr(domain_directories, .build_concepts_from_directory)
+  purrr::map_dfr(domain_directories, .build_concepts_from_directory) |>
+    mutate(version = version)
 }
 
 .get_raw_dir <- function(...) {
