@@ -45,7 +45,7 @@ available_bundles <- function(version = "latest") {
 #' @export
 #' @examples
 #' available_bundles() |> dplyr::filter(concept_name == "smoking") |> concept_by_bundle()
-#' dplyr::tibble(id = "smoking", domain = "observation", version = "latest") |> concept_by_bundle()
+#' dplyr::tibble(id = "smoking.csv", domain = "observation", version = "latest") |> concept_by_bundle()
 concept_by_bundle <- function(bundle_row) {
   stopifnot(is.data.frame(bundle_row))
   stopifnot(nrow(bundle_row) == 1)
