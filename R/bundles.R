@@ -43,6 +43,9 @@ available_bundles <- function(version = "latest") {
 #' @param bundle_row Single row of a dataframe with a domain and id
 #' @return Dataframe with a concept_id and domain column
 #' @export
+#' @examples
+#' available_bundles() |> dplyr::filter(concept_name == "smoking") |> concept_by_bundle()
+#' dplyr::tibble(id = "smoking", domain = "observation", version = "latest") |> concept_by_bundle()
 concept_by_bundle <- function(bundle_row) {
   stopifnot(is.data.frame(bundle_row))
   stopifnot(nrow(bundle_row) == 1)
