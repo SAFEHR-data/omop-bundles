@@ -17,5 +17,5 @@ Get concepts for a a single bundle row
 }
 \examples{
 available_bundles() |> dplyr::filter(concept_name == "smoking") |> concept_by_bundle()
-dplyr::tibble(id = "smoking", domain = "observation", version = "latest") |> concept_by_bundle()
+dplyr::tibble(id = "smoking.csv", domain = "observation", version = "latest") |> concept_by_bundle()
 }
