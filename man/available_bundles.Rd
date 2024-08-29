@@ -10,12 +10,12 @@ available_bundles(version = "latest")
 \item{version}{Requested version, if not defined, the latest will be used}
 }
 \value{
-dataframe that contains a concept_name and a domain column for each available concept
+dataframe that contains a "concept_name", "version" and a "domain" column for each available concept
 }
 \description{
 If a bundle has multiple names, then the id will be duplicated across rows
 }
 \examples{
 available_bundles()
-available_bundles('0.1')
+available_bundles("0.1")
 }

@@ -3,9 +3,14 @@ library(omopbundles)
 library(testthat)
 
 
-test_that("available_bundles is not empty", {
-  result <- available_bundles()
+test_that("available_bundles isn't empty and have correct columns", {
+  result <- omopbundles::available_bundles()
   expect_true(nrow(result) > 0, info = "The dataframe should not be empty")
+  hiv_ab <- filter(result, concept_name == "antibodies to hiv")
+  expect_equal(hiv_ab$version, "latest")
+  expect_equal(hiv_ab$id, "antibodies_to_hiv.csv")
+  expect_equal(hiv_ab$domain, "measurement")
+
 })
 
 test_that("Smoking exists as an observation", {
