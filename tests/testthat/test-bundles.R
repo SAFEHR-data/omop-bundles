@@ -21,12 +21,18 @@ test_that("Smoking exists as an observation", {
   expect_equal(result$domain, "observation")
 })
 
+test_that("Concept by bundle works with character values", {
+  smoking_concepts <- omopbundles::concept_by_bundle(domain = "observation", id = "smoking.csv")
+  expect_true(nrow(smoking_concepts) > 1, info = "Smoking should have multiple concepts")
+  expect_false(any(is.na(smoking_concepts$concept_id)), info = "Concept ids should not be NA")
+  expect_true(all(smoking_concepts$domain == "observation"), info = "Domain should be set correctly")
+})
 
-test_that("Avilable bundles and concept_by_bundle play nicely together", {
+test_that("Available bundles and concept_by_bundle play nicely together", {
   smoking_bundle <- available_bundles() |>
     dplyr::filter(concept_name == "smoking")
 
-  smoking_concepts <- concept_by_bundle(smoking_bundle)
+  smoking_concepts <- concept_by_bundle(smoking_bundle$domain, smoking_bundle$id)
 
   expect_true(nrow(smoking_concepts) > 1, info = "Smoking should have multiple concepts")
   expect_false(any(is.na(smoking_concepts$concept_id)), info = "Concept ids should not be NA")

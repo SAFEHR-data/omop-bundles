@@ -4,18 +4,25 @@
 \alias{concept_by_bundle}
 \title{Get concepts for a a single bundle row}
 \usage{
-concept_by_bundle(bundle_row)
+concept_by_bundle(domain, id, version = "latest")
 }
 \arguments{
-\item{bundle_row}{Single row of a dataframe with a domain and id}
+\item{domain}{The domain of the bundle.}
+
+\item{id}{The ID of the bundle.}
+
+\item{version}{The version of the bundle. Default is "latest".}
 }
 \value{
-Dataframe with a concept_id and domain column
+A data frame with the concept data.
 }
 \description{
-Get concepts for a a single bundle row
+Retrieves concept data for a specific bundle.
 }
 \examples{
-available_bundles() |> dplyr::filter(concept_name == "smoking") |> concept_by_bundle()
-dplyr::tibble(id = "smoking.csv", domain = "observation", version = "latest") |> concept_by_bundle()
+# Using with the rest of the package
+smoking_info <- available_bundles() |> dplyr::filter(concept_name == "smoking")
+concept_by_bundle(domain = smoking_info$domain, id = smoking_info$id, version = smoking_info$version)
+# Using if you know the details directly
+concept_by_bundle(domain = "observation", id = "smoking.csv")
 }

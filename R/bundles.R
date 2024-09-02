@@ -13,7 +13,7 @@
 #' available_bundles()
 #' available_bundles("0.1")
 available_bundles <- function(version = "latest") {
-  raw_dir <- .get_raw_dir()
+  raw_dir <- .get_raw_dir(version = version)
   directories <- list.dirs(raw_dir, full.names = TRUE)
   domain_directories <- directories[directories != raw_dir]
 
@@ -21,7 +21,9 @@ available_bundles <- function(version = "latest") {
     mutate(version = version)
 }
 
-.get_raw_dir <- function(...) {
+.get_raw_dir <- function(version, ...) {
+  if (version != "latest") warning("Versioning not yet implemented, using version = 'latest'")
+
   system.file("data-raw", ..., package = "omopbundles", mustWork = TRUE)
 }
 
@@ -38,19 +40,25 @@ available_bundles <- function(version = "latest") {
     dplyr::mutate(concept_name = gsub("_", " ", concept_name))
 }
 
+
 #' @title Get concepts for a a single bundle row
 #'
-#' @param bundle_row Single row of a dataframe with a domain and id
-#' @return Dataframe with a concept_id and domain column
+#' @description Retrieves concept data for a specific bundle.
+#'
+#' @param domain The domain of the bundle.
+#' @param id The ID of the bundle.
+#' @param version The version of the bundle. Default is "latest".
+#' @return A data frame with the concept data.
 #' @export
 #' @examples
-#' available_bundles() |> dplyr::filter(concept_name == "smoking") |> concept_by_bundle()
-#' dplyr::tibble(id = "smoking.csv", domain = "observation", version = "latest") |> concept_by_bundle()
-concept_by_bundle <- function(bundle_row) {
-  stopifnot(is.data.frame(bundle_row))
-  stopifnot(nrow(bundle_row) == 1)
-
-  .get_raw_dir(bundle_row$domain, bundle_row$id) |>
+#' # Usage with available_bundles, from a single row
+#' smoking_info <- available_bundles() |> dplyr::filter(concept_name == "smoking")
+#' concept_by_bundle(domain = smoking_info$domain, id = smoking_info$id, version = smoking_info$version)
+#' # Using if you know the details directly
+#' concept_by_bundle(domain = "observation", id = "smoking.csv")
+concept_by_bundle <- function(domain, id, version = "latest") {
+  .get_raw_dir(version = version, domain, id) |>
     readr::read_csv(show_col_types = FALSE) |>
-    dplyr::mutate(domain = bundle_row$domain)
+    dplyr::mutate(domain = domain)
 }
+
