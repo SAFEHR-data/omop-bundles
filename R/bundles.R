@@ -61,4 +61,3 @@ concept_by_bundle <- function(domain, id, version = "latest") {
     readr::read_csv(show_col_types = FALSE) |>
     dplyr::mutate(domain = domain)
 }
-
