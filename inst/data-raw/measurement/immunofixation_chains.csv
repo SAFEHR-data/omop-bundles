@@ -1,0 +1,8 @@
+concept_id,concept_name,allowed,per_person,min,max
+3020508,IgA [Presence] in Serum by Immunofixation,TRUE,1,NA,NA
+3026687,IgG [Presence] in Serum by Immunofixation,TRUE,1,NA,NA
+3009762,IgM [Presence] in Serum by Immunofixation,TRUE,1,NA,NA
+3005427,IgD [Presence] in Serum by Immunofixation,TRUE,1,NA,NA
+3000841,IgE [Presence] in Serum by Immunofixation,TRUE,1,NA,NA
+3047350,Kappa light chains.free [Presence] in Serum by Immunofixation,TRUE,1,NA,NA
+3030207,Lambda light chains.free [Presence] in Serum by Immunofixation,TRUE,1,NA,NA
