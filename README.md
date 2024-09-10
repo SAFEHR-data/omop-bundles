@@ -23,7 +23,7 @@ You can install the development version of data-catalogue from within R:
 
 ```r
 # install.packages("pak")
-pak::pak("SAFEHR-data/data-catalogue")
+pak::pak("SAFEHR-data/omop-bundles")
 ```
 
 ## Development
