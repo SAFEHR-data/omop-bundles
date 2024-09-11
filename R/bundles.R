@@ -28,7 +28,7 @@ available_bundles <- function(version = "latest") {
 }
 
 .build_concepts_from_directory <- function(directory) {
-  concept_files <- list.files(directory)
+  concept_files <- list.files(file.path(directory, "bundles"))
   concept_name <- NULL
 
   dplyr::tibble(
@@ -57,7 +57,7 @@ available_bundles <- function(version = "latest") {
 #' # Using if you know the details directly
 #' concept_by_bundle(domain = "observation", id = "smoking.csv")
 concept_by_bundle <- function(domain, id, version = "latest") {
-  .get_raw_dir(version = version, domain, id) |>
+  .get_raw_dir(version = version, domain, "bundles", id) |>
     readr::read_csv(show_col_types = FALSE) |>
     dplyr::mutate(domain = domain)
 }
