@@ -1,0 +1,274 @@
+---
+title: "The `omop_bundle` class"
+author: "Milan Malfait"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{The `omop_bundle` class}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+## Overview
+
+- [Introduction](#introduction)
+- [Implementation](#implementation)
+  - [Constructor](#constructor)
+  - [Validator](#validator)
+  - [Helper](#helper)
+- [Methods](#methods)
+  - [Printing](#printing)
+  - [Getters](#getters)
+- [Usage](#usage)
+
+```{r setup}
+library(omopbundles)
+```
+
+## Introduction
+
+This vignette describes the prototype and rationale for an `omop_bundle` class to represent OMOP bundles.
+Its main target audience is developers who want to understand the implementation of the class.
+
+## Implementation
+
+The `omop_bundle` class is essentially a collection of concept IDs, so we could represent it as a
+`character()` vector with some additional attributes to store the bundle id and domain.
+
+The class has the following attributes:
+
+- `id`: the bundle id
+- `domain`: the domain of the bundle
+
+Following the recommendations from [Advanced R](http://adv-r.had.co.nz/S3.html), we implement the
+`omop_bundle` class with a constructor `new_bundle()`, a validator `validate_bundle()` and an exported
+helper `bundle()` for end users.
+
+The base type of the `omop_bundle` class is a `character()`, as essentially it's just a collection of
+concept IDs. In its simplest form we could define a bundle as
+
+```{r bundle_as_list}
+bundle_as_list <- list(
+  concepts = c("concept_id_1", "concept_id_2"),
+  id = "bundle_id",
+  domain = "domain",
+  version = "latest"
+)
+bundle_as_list
+```
+
+Defining a dedicated `omop_bundle` class allows us to more strict about the structure of the object, e.g.
+a bundle should have only 1 id, 1 domain and a vector of concepts, in addition to defining specific
+methods for the class.
+
+### Constructor
+
+The constructor is internal use only and has limited validity checks.
+
+We use the [`vctrs`](https://vctrs.r-lib.org/) package to define the class and attributes of the object.
+The advantage of using `{vctrs}` is that it prevents some unwanted behaviour of `c()`.
+E.g. it doesn't make sense to concatenate 2 bundles with `c()` as they should be separate entities
+linked to their bundle id and domain.
+
+```{r new_bundle}
+new_bundle <- function(x = character(), id = "", domain = "", version = "latest") {
+  stopifnot(is.character(x))
+  stopifnot(is.character(id))
+  stopifnot(is.character(domain))
+
+  vctrs::new_vctr(x,
+    class = c("omop_bundle", "list"),
+    id = id,
+    domain = domain,
+    version = version
+  )
+}
+
+(x <- new_bundle(c("concept_id_1", "concept_id_2"), id = "bundle_id", domain = "domain"))
+typeof(x)
+class(x)
+```
+
+#### Why `vctrs::new_vctr()`?
+
+With the `{vctrs}` implementation, `c()` gives an error in case of different `id` or `domain` attributes:
+
+```{r, error=TRUE}
+c(new_bundle(c("1", "2"), id = "id1", domain = "domain"), new_bundle(c("a", "b"), id = "id2", domain = "domain"))
+```
+
+But worsk when the `id` and `domain` are the same:
+
+```{r}
+c(new_bundle(c("1", "2"), id = "id1", domain = "domain"), new_bundle(c("a", "b"), id = "id1", domain = "domain"))
+```
+
+This is not the case when implementing the class with base R's `structure()`, where `c()` will just
+concatenate the bundles regardless of whether their ID and domain match.
+
+The `{vctrs}` class implementation has some additional benefits, see the [vignettes](https://vctrs.r-lib.org/)
+for more info.
+
+### Validator
+
+The validator is used to check if the object is a valid bundle.
+
+```{r validate_bundle, error=TRUE}
+validate_bundle <- function(x) {
+  concept_ids <- unclass(x)
+  id <- attr(x, "id")
+  domain <- attr(x, "domain")
+  version <- attr(x, "version")
+  
+  if (any(is.na(concept_ids)) || any(concept_ids == "")) {
+    rlang::abort("All concept IDs must be non-missing and non-empty strings")
+  }
+  if (length(id) != 1 || id == "") {
+    rlang::abort("The bundle ID must be a single non-empty string") 
+  }
+  if (length(domain) != 1 || domain == "") {
+    rlang::abort("The Bundle domain must be a single non-empty string") 
+  }
+  if (length(version) != 1 || version == "") {
+    rlang::abort("The Bundle version must be a single non-empty string") 
+  }
+  
+  ## Return the input so we can reuse the validator in the helper
+  x
+}
+
+validate_bundle(new_bundle("", id = "bundle_id", domain = "domain"))
+validate_bundle(new_bundle(c("id1", NA), id = "bundle_id", domain = "domain"))
+validate_bundle(new_bundle(c("id1", "id2"), id = "", domain = "domain"))
+```
+
+### Helpers
+
+This is the main exported function intended for end users. The helper is a bit more flexible in
+the sense that it coerces the input to a `character` vector, so that we can also pass IDs as integers.
+The helper calls both the constructor and validator so that the generated object is guaranteed to
+be valid. In the package, this is also the function that would carry the main documentation for the 
+class.
+
+```{r bundle}
+#' 
+bundle <- function(x, id, domain, version = "latest") {
+  x <- as.character(x)
+  validate_bundle(new_bundle(x, id, domain, version = version))
+}
+
+bundle(c(1234567, 2345678), id = "bundle_id", domain = "domain")
+```
+
+```{r}
+bundle1 <- bundle(c(1234567, 2345678), id = "bundle_id1", domain = "domain")
+bundle2 <- bundle(c("a", "b"), id = "bundle_id2", domain = "domain")
+```
+
+We also define a helper that tests whether an object is a bundle.
+
+```{r is_bundle}
+#' Test if an object is an OMOP bundle
+#' ...
+#' @export
+is_bundle <- function(x) {
+  inherits(x, "omop_bundle")
+}
+```
+
+
+## Methods
+
+The following methods are implemented for the `omop_bundle` class:
+
+- some formatting methods to print the class nicely
+- `id`: get the id of the bundle
+- `domain`: get the domain of the bundle
+
+
+### Define how the object is printed
+
+We override the `vctrs::obj_print_header` method to print the bundle ID and domain in the header.
+
+```{r}
+#' @export
+obj_print_header.omop_bundle <- function(x, ...) {
+  id <- attr(x, "id")
+  domain <- attr(x, "domain")
+  version <- attr(x, "version")
+  cat("<", vctrs::vec_ptype_full(x), "[", vctrs::vec_size(x), "]>",
+    " {id: ", id, ", domain: ", domain, ", version: ", version, "}\n",
+    sep = ""
+  )
+  invisible(x)
+}
+
+#' @export
+vec_ptype_abbr.omop_bundle <- function(x, ...) {
+  "bundle"
+}
+
+x <- bundle(c(1234567, 2345678), id = "bundle_id1", domain = "domain")
+print(x)
+str(x)
+```
+
+### Getters
+
+```{r getters}
+bundle_id <- function(x) {
+  UseMethod("bundle_id")
+}
+
+bundle_id.omop_bundle <- function(x) {
+  attr(x, "id")
+}
+
+bundle_domain <- function(x) {
+  UseMethod("bundle_domain")
+}
+
+bundle_domain.omop_bundle <- function(x) {
+  attr(x, "domain")
+}
+
+bundle_version <- function(x) {
+  UseMethod("bundle_version")
+}
+
+bundle_version.omop_bundle <- function(x) {
+  attr(x, "version")
+}
+
+bundle_id(x)
+bundle_domain(x)
+bundle_version(x)
+```
+
+
+## Usage
+
+So how would we actually use this class?
+
+We could use it as the return type for a `get_bundle()` function that retrieves a bundle.
+
+```{r}
+get_bundle <- function(id, domain, version = "latest") {
+  concept_tbl <- concept_by_bundle(domain = domain, id = id)
+  bundle(concept_tbl$concept_id, id = id, domain = domain, version = version)
+}
+
+antigens <- get_bundle(id = "antigens.csv", domain = "measurement")
+
+antigens
+str(antigens)
+length(antigens)
+bundle_id(antigens)
+bundle_domain(antigens)
+```
