@@ -1,35 +1,35 @@
 id,concept_name
-HBA1c.csv,HBA1c
-LDH.csv,LDH
-antibodies_to_hiv.csv,Antibodies to HIV
-antigens.csv,Antigens
-blood_antibodies.csv,Blood antibodies
-bone_profile.csv,Bone profile
-covid_antibody_levels.csv,Covid antibody levels
-eGFR.csv,eGFR
-full_blood_count_differential.csv,Full blood count differential
-haemoglobin.csv,Haemoglobin
-haptoglobin.csv,Haptoglobin
-height_and_weight.csv,Height and weight
-hepatitis_b_screening.csv,Hepatitis b screening
-hepatitis_c_screening.csv,Hepatitis c screening
-immunofixation_chains.csv,Immunofixation chains
-immunoglobulins.csv,Immunoglobulins
-light_chains.csv,Light chains
-liver_function_test.csv,Liver function test
-liver_profile.csv,Liver profile
-monoclonal_bands.csv,Monoclonal bands
-plasma_viscosity.csv,Plasma viscosity
-renal_profile.csv,Renal profile
-serum_albumin.csv,Serum albumin
-serum_beta_2_microglobulin.csv,Serum beta 2 microglobulin
-serum_corrected_calcium.csv,Serum corrected calcium
-serum_creatinine.csv,Serum creatinine
-serum_glucose.csv,Serum glucose
-serum_immunofixation.csv,Serum immunofixation
-serum_urea.csv,Serum urea
-thyroid_profile.csv,Thyroid profile
-total_protein.csv,Total protein
-urea_electrolyte.csv,Urea electrolyte
-urine_albumin.csv,Urine albumin
-urine_bence_jones_protein.csv,Urine bence jones protein
+HBA1c,HBA1c
+LDH,LDH
+antibodies_to_hiv,Antibodies to HIV
+antigens,Antigens
+blood_antibodies,Blood antibodies
+bone_profile,Bone profile
+covid_antibody_levels,Covid antibody levels
+eGFR,eGFR
+full_blood_count_differential,Full blood count differential
+haemoglobin,Haemoglobin
+haptoglobin,Haptoglobin
+height_and_weight,Height and weight
+hepatitis_b_screening,Hepatitis B screening
+hepatitis_c_screening,Hepatitis C screening
+immunofixation_chains,Immunofixation chains
+immunoglobulins,Immunoglobulins
+light_chains,Light chains
+liver_function_test,Liver function test
+liver_profile,Liver profile
+monoclonal_bands,Monoclonal bands
+plasma_viscosity,Plasma viscosity
+renal_profile,Renal profile
+serum_albumin,Serum albumin
+serum_beta_2_microglobulin,Serum beta 2 microglobulin
+serum_corrected_calcium,Serum corrected calcium
+serum_creatinine,Serum creatinine
+serum_glucose,Serum glucose
+serum_immunofixation,Serum immunofixation
+serum_urea,Serum urea
+thyroid_profile,Thyroid profile
+total_protein,Total protein
+urea_electrolyte,Urea electrolyte
+urine_albumin,Urine albumin
+urine_bence_jones_protein,Urine bence jones protein

@@ -1,6 +1,8 @@
 #' @importFrom dplyr tibble mutate
 #' @importFrom purrr map_dfr
 #' @importFrom readr read_csv
+#' @importFrom glue glue
+
 
 #' @title Get available bundles for a version
 #'
@@ -13,31 +15,13 @@
 #' available_bundles()
 #' available_bundles("0.1")
 available_bundles <- function(version = "latest") {
-  raw_dir <- .get_raw_dir(version = version)
-  directories <- list.dirs(raw_dir, full.names = TRUE)
-  domain_directories <- directories[directories != raw_dir]
+  raw_dir <- omopbundles:::get_raw_dir(version = version)
+  directories <- dir(raw_dir, full.names = TRUE)
+  bundle_name_paths <- file.path(directories, "bundle_names.csv")
 
-  purrr::map_dfr(domain_directories, .build_concepts_from_directory) |>
+
+  purrr::map_dfr(bundle_name_paths, omopbundles:::parse_bundle_names) |>
     mutate(version = version)
-}
-
-.get_raw_dir <- function(version, ...) {
-  if (version != "latest") warning("Versioning not yet implemented, using version = 'latest'")
-
-  system.file("data-raw", ..., package = "omopbundles", mustWork = TRUE)
-}
-
-.build_concepts_from_directory <- function(directory) {
-  concept_files <- list.files(file.path(directory, "bundles"))
-  concept_name <- NULL
-
-  dplyr::tibble(
-    id = concept_files,
-    concept_name = concept_files,
-    domain = basename(directory)
-  ) |>
-    dplyr::mutate(concept_name = sub("\\.csv$", "", concept_name)) |>
-    dplyr::mutate(concept_name = gsub("_", " ", concept_name))
 }
 
 
@@ -55,9 +39,9 @@ available_bundles <- function(version = "latest") {
 #' smoking_info <- available_bundles() |> dplyr::filter(concept_name == "smoking")
 #' concept_by_bundle(domain = smoking_info$domain, id = smoking_info$id, version = smoking_info$version)
 #' # Using if you know the details directly
-#' concept_by_bundle(domain = "observation", id = "smoking.csv")
+#' concept_by_bundle(domain = "observation", id = "smoking")
 concept_by_bundle <- function(domain, id, version = "latest") {
-  .get_raw_dir(version = version, domain, "bundles", id) |>
+  omopbundles:::get_raw_dir(version = version, domain, "bundles", glue::glue("{id}.csv")) |>
     readr::read_csv(show_col_types = FALSE) |>
     dplyr::mutate(domain = domain)
 }
