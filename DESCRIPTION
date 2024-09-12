@@ -15,10 +15,11 @@ Imports:
   vroom (>= 1.0)
 Suggests:
   devtools,
-  usethis,
-  testthat (>= 3.0.0),
-  lintr,
   pak,
-  pkgload
+  pkgload,
+  lintr,
+  stringr,
+  testthat (>= 3.0.0),
+  usethis
 Config/testthat/edition: 3
 RoxygenNote: 7.3.2

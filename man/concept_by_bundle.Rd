@@ -21,8 +21,8 @@ Retrieves concept data for a specific bundle.
 }
 \examples{
 # Usage with available_bundles, from a single row
-smoking_info <- available_bundles() |> dplyr::filter(concept_name == "Smoking")
-concept_by_bundle(domain = smoking_info$domain, id = smoking_info$id, version = smoking_info$version)
+smoking <- available_bundles() |> dplyr::filter(concept_name == "Smoking")
+concept_by_bundle(domain = smoking$domain, id = smoking$id, version = smoking$version)
 # Using if you know the details directly
 concept_by_bundle(domain = "observation", id = "smoking")
 }

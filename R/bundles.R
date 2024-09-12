@@ -15,12 +15,12 @@
 #' available_bundles()
 #' available_bundles("0.1")
 available_bundles <- function(version = "latest") {
-  raw_dir <- omopbundles:::get_raw_dir(version = version)
+  raw_dir <- get_raw_dir(version = version)
   directories <- dir(raw_dir, full.names = TRUE)
   bundle_name_paths <- file.path(directories, "bundle_names.csv")
 
 
-  purrr::map_dfr(bundle_name_paths, omopbundles:::parse_bundle_names) |>
+  purrr::map_dfr(bundle_name_paths, parse_bundle_names) |>
     mutate(version = version)
 }
 
@@ -36,12 +36,12 @@ available_bundles <- function(version = "latest") {
 #' @export
 #' @examples
 #' # Usage with available_bundles, from a single row
-#' smoking_info <- available_bundles() |> dplyr::filter(concept_name == "Smoking")
-#' concept_by_bundle(domain = smoking_info$domain, id = smoking_info$id, version = smoking_info$version)
+#' smoking <- available_bundles() |> dplyr::filter(concept_name == "Smoking")
+#' concept_by_bundle(domain = smoking$domain, id = smoking$id, version = smoking$version)
 #' # Using if you know the details directly
 #' concept_by_bundle(domain = "observation", id = "smoking")
 concept_by_bundle <- function(domain, id, version = "latest") {
-  omopbundles:::get_raw_dir(version = version, domain, "bundles", glue::glue("{id}.csv")) |>
+  get_raw_dir(version = version, domain, "bundles", glue::glue("{id}.csv")) |>
     readr::read_csv(show_col_types = FALSE) |>
     dplyr::mutate(domain = domain)
 }
