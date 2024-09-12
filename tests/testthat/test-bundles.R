@@ -1,8 +1,3 @@
-library(dplyr)
-library(omopbundles)
-library(testthat)
-
-
 test_that("available_bundles isn't empty and have correct columns", {
   result <- omopbundles::available_bundles()
   expect_true(nrow(result) > 0, info = "The dataframe should not be empty")
