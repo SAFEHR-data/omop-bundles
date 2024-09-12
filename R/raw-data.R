@@ -28,7 +28,8 @@ get_raw_dir <- function(..., version = "latest") {
   file_path <- system.file("data-raw", ..., package = "omopbundles")
 
   if (!file.exists(file_path)){
-    stop(glue::glue("File not found: {file_path}"))
+    path <- paste(..., sep = "/")
+    stop(glue::glue("File not found in raw data, path given: {path}"))
   }
 
   file_path
