@@ -38,10 +38,10 @@ validate_bundle <- function(x) {
     rlang::abort("The bundle ID must be a single non-empty string") 
   }
   if (length(domain) != 1 || domain == "") {
-    rlang::abort("The Bundle domain must be a single non-empty string") 
+    rlang::abort("The bundle domain must be a single non-empty string") 
   }
   if (length(version) != 1 || version == "") {
-    rlang::abort("The Bundle version must be a single non-empty string") 
+    rlang::abort("The bundle version must be a single non-empty string") 
   }
   
   ## Return the input so we can reuse the validator in the helper
