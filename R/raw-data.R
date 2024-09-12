@@ -27,7 +27,7 @@ get_raw_dir <- function(..., version = "latest") {
 
   file_path <- system.file("data-raw", ..., package = "omopbundles")
 
-  if (!file.exists(file_path)){
+  if (!file.exists(file_path)) {
     path <- paste(..., sep = "/")
     stop(glue::glue("File not found in raw data, path given: {path}"))
   }
@@ -41,7 +41,6 @@ parse_bundle_names <- function(bundle_name_path) {
     dirname() |>
     basename()
 
-  domain <- NULL
   readr::read_csv(bundle_name_path, col_types = "cc") |>
     mutate(domain = bundle_name)
 }

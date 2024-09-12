@@ -20,16 +20,16 @@ assert_bundle_has_name <- function(bundle) {
   bundle_name_file <- omopbundles:::get_raw_dir(bundle$domain, "bundle_names.csv")
   bundle_names <- read_csv(bundle_name_file, show_col_types = FALSE)
 
-  expect_true(bundle$id %in% bundle_names$id, glue::glue("{bundle$id} should at least one name in: {bundle$domain}/bundle_names.csv"))
+  expect_true(bundle$id %in% bundle_names$id,
+              glue::glue("{bundle$id} should at least one name in: {bundle$domain}/bundle_names.csv"))
 }
 
 test_that("All raw bundles have at least one name", {
-   raw_dir <- omopbundles:::get_raw_dir()
+  raw_dir <- omopbundles:::get_raw_dir()
 
-   concept_files <- Sys.glob(file.path(raw_dir, "*", "bundles", "*.csv"))
-   bundle_ids <- purrr::map(concept_files, extract_bundle_details)
-   purrr::walk(bundle_ids, assert_bundle_has_name)
-
+  concept_files <- Sys.glob(file.path(raw_dir, "*", "bundles", "*.csv"))
+  bundle_ids <- purrr::map(concept_files, extract_bundle_details)
+  purrr::walk(bundle_ids, assert_bundle_has_name)
 })
 
 
