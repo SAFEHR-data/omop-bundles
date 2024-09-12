@@ -13,6 +13,7 @@
 #' @description If a bundle has multiple names, then the id will be duplicated across rows
 #'
 #' @return dataframe that contains a "concept_name" and a "domain" column for each available concept
+#' @keywords internal
 raw_bundles <- function() {
   raw_dir <- get_raw_dir()
   directories <- dir(raw_dir, full.names = TRUE)
@@ -47,13 +48,14 @@ parse_bundle_names <- function(bundle_name_path) {
 
 
 
-#' @title Get concepts for a a single bundle row
+#' @title Get concepts for a single bundle row
 #'
 #' @description Retrieves concept data for a specific bundle.
 #'
 #' @param domain The domain of the bundle.
 #' @param id The ID of the bundle.
 #' @return A data frame with the concept data.
+#' @keywords internal
 raw_concept_by_bundle <- function(domain, id) {
   file <- get_raw_dir(domain, "bundles", glue::glue("{id}.csv"))
 

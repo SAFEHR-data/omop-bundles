@@ -1,11 +1,3 @@
-library(dplyr)
-library(omopbundles)
-library(testthat)
-library(stringr)
-library(purrr)
-
-
-
 extract_bundle_details <- function(path) {
   filename <- stringr::str_remove(basename(path), "\\.csv$")
 
