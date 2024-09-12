@@ -31,17 +31,17 @@ validate_bundle <- function(x) {
   domain <- attr(x, "domain")
   version <- attr(x, "version")
   
-  if (any(is.na(concept_ids)) || any(concept_ids == "")) {
-    rlang::abort("All concept IDs must be non-missing and non-empty strings")
+  if (any(is.na(concept_ids))) {
+    abort("All concept IDs must be non-missing and non-empty strings")
   }
-  if (length(id) != 1 || id == "") {
-    rlang::abort("The bundle ID must be a single non-empty string") 
+  if (length(id) != 1 || id == "" || is.na(id)) {
+    abort("The bundle ID must be a single non-empty string") 
   }
-  if (length(domain) != 1 || domain == "") {
-    rlang::abort("The bundle domain must be a single non-empty string") 
+  if (length(domain) != 1 || domain == "" || is.na(domain)) {
+    abort("The bundle domain must be a single non-empty string") 
   }
   if (length(version) != 1 || version == "") {
-    rlang::abort("The bundle version must be a single non-empty string") 
+    abort("The bundle version must be a single non-empty string") 
   }
   
   ## Return the input so we can reuse the validator in the helper
