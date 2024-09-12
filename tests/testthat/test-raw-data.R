@@ -17,7 +17,7 @@ assert_bundle_has_name <- function(bundle) {
 }
 
 test_that("All raw bundles have at least one name", {
-  raw_dir <-get_raw_dir()
+  raw_dir <- get_raw_dir()
 
   concept_files <- Sys.glob(file.path(raw_dir, "*", "bundles", "*.csv"))
   bundle_ids <- purrr::map(concept_files, extract_bundle_details)
