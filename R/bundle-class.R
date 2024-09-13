@@ -1,7 +1,8 @@
 #' The OMOP `bundle` class
 #' @export
+#' @importFrom rlang abort
 bundle <- function(x, id, domain, version = "latest") {
-  x <- as.character(x)
+  x <- as.integer(x)
   validate_bundle(new_bundle(x, id = id, domain = domain, version = version))
 }
 
@@ -12,8 +13,8 @@ is_bundle <- function(x) {
   inherits(x, "omop_bundle")
 }
 
-new_bundle <- function(x = character(), id = "", domain = "", version = "latest") {
-  stopifnot(is.character(x))
+new_bundle <- function(x = integer(), id = "", domain = "", version = "latest") {
+  stopifnot(is.integer(x))
   stopifnot(is.character(id))
   stopifnot(is.character(domain))
 
@@ -32,7 +33,7 @@ validate_bundle <- function(x) {
   version <- attr(x, "version")
   
   if (any(is.na(concept_ids))) {
-    abort("All concept IDs must be non-missing and non-empty strings")
+    abort("All concept IDs must be non-missing integers")
   }
   if (length(id) != 1 || id == "" || is.na(id)) {
     abort("The bundle ID must be a single non-empty string") 
