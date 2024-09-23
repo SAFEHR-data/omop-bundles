@@ -7,8 +7,9 @@
 raw_bundles()
 }
 \value{
-dataframe that contains a "concept_name" and a "domain" column for each available concept
+dataframe that contains a "bundle_name" and a "domain" column for each available bundle
 }
 \description{
 If a bundle has multiple names, then the id will be duplicated across rows
 }
+\keyword{internal}

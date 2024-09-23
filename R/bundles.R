@@ -9,7 +9,7 @@
 #' @description If a bundle has multiple names, then the id will be duplicated across rows
 #'
 #' @param version Requested version, if not defined, the latest will be used
-#' @return dataframe that contains a "concept_name", "version" and a "domain" column for each available concept
+#' @return dataframe that contains a "bundle_name", "version" and a "domain" column for each available bundle
 #' @export
 #' @examples
 #' available_bundles()
@@ -36,7 +36,7 @@ available_bundles <- function(version = "latest") {
 #' @export
 #' @examples
 #' # Usage with available_bundles, from a single row
-#' smoking <- available_bundles() |> dplyr::filter(concept_name == "Smoking")
+#' smoking <- available_bundles() |> dplyr::filter(bundle_name == "Smoking")
 #' concept_by_bundle(domain = smoking$domain, id = smoking$id, version = smoking$version)
 #' # Using if you know the details directly
 #' concept_by_bundle(domain = "observation", id = "smoking")

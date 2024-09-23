@@ -10,7 +10,7 @@ available_bundles(version = "latest")
 \item{version}{Requested version, if not defined, the latest will be used}
 }
 \value{
-dataframe that contains a "concept_name", "version" and a "domain" column for each available concept
+dataframe that contains a "bundle_name", "version" and a "domain" column for each available bundle
 }
 \description{
 If a bundle has multiple names, then the id will be duplicated across rows
