@@ -482,13 +482,7 @@
     "glue": {
       "Package": "glue",
       "Version": "1.7.0",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Requirements": [
-        "R",
-        "methods"
-      ],
-      "Hash": "e0b3a53876554bd45879e596cdb10a52"
+      "Source": "Repository"
     },
     "highr": {
       "Package": "highr",
@@ -1238,6 +1232,11 @@
         "vctrs"
       ],
       "Hash": "960e2ae9e09656611e0b8214ad543207"
+    },
+    "styler": {
+      "Package": "styler",
+      "Version": "1.10.3",
+      "Source": "Repository"
     },
     "sys": {
       "Package": "sys",
