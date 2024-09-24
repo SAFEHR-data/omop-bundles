@@ -12,7 +12,7 @@
 #'
 #' @description If a bundle has multiple names, then the id will be duplicated across rows
 #'
-#' @return dataframe that contains a "concept_name" and a "domain" column for each available concept
+#' @return dataframe that contains a "bundle_name" and a "domain" column for each available bundle
 #' @keywords internal
 raw_bundles <- function() {
   raw_dir <- get_raw_dir()
@@ -38,12 +38,12 @@ get_raw_dir <- function(..., version = "latest") {
 
 
 parse_bundle_names <- function(bundle_name_path) {
-  bundle_name <- bundle_name_path |>
+  domain_name <- bundle_name_path |>
     dirname() |>
     basename()
 
   readr::read_csv(bundle_name_path, col_types = "cc") |>
-    mutate(domain = bundle_name)
+    mutate(domain = domain_name)
 }
 
 

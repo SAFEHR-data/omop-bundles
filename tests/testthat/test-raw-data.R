@@ -12,8 +12,10 @@ assert_bundle_has_name <- function(bundle) {
   bundle_name_file <- get_raw_dir(bundle$domain, "bundle_names.csv")
   bundle_names <- read_csv(bundle_name_file, show_col_types = FALSE)
 
-  expect_true(bundle$id %in% bundle_names$id,
-              glue::glue("{bundle$id} should at least one name in: {bundle$domain}/bundle_names.csv"))
+  expect_true(
+    bundle$id %in% bundle_names$id,
+    glue::glue("{bundle$id} should at least one name in: {bundle$domain}/bundle_names.csv")
+  )
 }
 
 test_that("All raw bundles have at least one name", {
@@ -38,5 +40,4 @@ test_that("All raw bundle names map to a bundle file that has at least one conce
     # Check that at least one concept
     expect_true(nrow(concepts) > 0)
   })
-
 })

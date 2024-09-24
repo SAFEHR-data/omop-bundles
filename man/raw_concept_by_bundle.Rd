@@ -2,7 +2,7 @@
 % Please edit documentation in R/raw-data.R
 \name{raw_concept_by_bundle}
 \alias{raw_concept_by_bundle}
-\title{Get concepts for a a single bundle row}
+\title{Get concepts for a single bundle row}
 \usage{
 raw_concept_by_bundle(domain, id)
 }
@@ -17,3 +17,4 @@ A data frame with the concept data.
 \description{
 Retrieves concept data for a specific bundle.
 }
+\keyword{internal}
