@@ -1,7 +1,7 @@
 Package: omopbundles
 Type: Package
 Title: Bundles of OMOP Concepts for Ease of Data Selection
-Version: 0.1.0
+Version: 0.1.1
 Authors@R: person('Stef', 'Piatek', email = 'stefan.piatek@nhs.net', role = c('cre', 'aut'))
 Description: Bundles of OMOP Concepts for Ease of Data Selection.
 License: Apache License (>= 2)
