@@ -8,20 +8,20 @@ License: Apache License (>= 2)
 Encoding: UTF-8
 LazyData: true
 Imports:
-  dplyr (>= 1.0),
-  glue (>= 1.0),
-  purrr (>= 1.0),
-  readr (>= 2.0),
-  rlang (>= 1.1),
-  vroom (>= 1.0)
+    dplyr (>= 1.0),
+    glue (>= 1.0),
+    purrr (>= 1.0),
+    readr (>= 2.0),
+    rlang (>= 1.1),
+    vroom (>= 1.0)
 Suggests:
-  devtools,
-  pak,
-  pkgload,
-  lintr,
-  stringr,
-  styler,
-  testthat (>= 3.0.0),
-  usethis
+    devtools,
+    pak,
+    pkgload,
+    lintr,
+    stringr,
+    styler,
+    testthat (>= 3.0.0),
+    usethis
 Config/testthat/edition: 3
 RoxygenNote: 7.3.2
