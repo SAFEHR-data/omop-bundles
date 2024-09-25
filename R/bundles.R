@@ -32,16 +32,23 @@ available_bundles <- function(version = "latest") {
 #' @param domain The domain of the bundle.
 #' @param id The ID of the bundle.
 #' @param version The version of the bundle. Default is "latest".
+#'
 #' @return A data frame with the concept data.
 #' @export
+#'
 #' @examples
 #' # Usage with available_bundles, from a single row
 #' smoking <- available_bundles() |> dplyr::filter(bundle_name == "Smoking")
 #' concept_by_bundle(domain = smoking$domain, id = smoking$id, version = smoking$version)
 #' # Using if you know the details directly
 #' concept_by_bundle(domain = "observation", id = "smoking")
+#'
+#' @importFrom rlang .data
 concept_by_bundle <- function(domain, id, version = "latest") {
   get_raw_dir(version = version, domain, "bundles", glue::glue("{id}.csv")) |>
     readr::read_csv(show_col_types = FALSE) |>
-    dplyr::mutate(domain = domain)
+    dplyr::mutate(
+      domain = domain,
+      concept_id = as.integer(.data$concept_id)
+    )
 }
