@@ -46,9 +46,6 @@ available_bundles <- function(version = "latest") {
 #' concept_by_bundle(domain = "observation", id = "smoking")
 concept_by_bundle <- function(domain, id, version = "latest") {
   get_raw_dir(version = version, domain, "bundles", glue::glue("{id}.csv")) |>
-    readr::read_csv(show_col_types = FALSE) |>
-    dplyr::mutate(
-      domain = domain,
-      concept_id = as.integer(.data$concept_id)
-    )
+    readr::read_csv(col_types = readr::cols(concept_id = readr::col_integer())) |>
+    dplyr::mutate(domain = domain)
 }
