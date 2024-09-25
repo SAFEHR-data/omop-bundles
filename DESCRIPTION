@@ -12,6 +12,7 @@ Imports:
   glue (>= 1.0),
   purrr (>= 1.0),
   readr (>= 2.0),
+  rlang (>= 1.1),
   vroom (>= 1.0)
 Suggests:
   devtools,
