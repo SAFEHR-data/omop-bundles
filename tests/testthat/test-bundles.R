@@ -20,6 +20,7 @@ test_that("Concept by bundle works with character values", {
   expect_true(nrow(smoking_concepts) > 1, info = "Smoking should have multiple concepts")
   expect_false(any(is.na(smoking_concepts$concept_id)), info = "Concept ids should not be NA")
   expect_true(all(smoking_concepts$domain == "observation"), info = "Domain should be set correctly")
+  expect_type(smoking_concepts$concept_id, "integer")
 })
 
 test_that("Available bundles and concept_by_bundle play nicely together", {
