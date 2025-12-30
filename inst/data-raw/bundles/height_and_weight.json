@@ -1,0 +1,15 @@
+{
+  "concepts": [
+    {
+      "concept_key": "SNOMED_50373000",
+      "include_descendants": false,
+      "is_excluded": false
+    },
+    {
+      "concept_key": "SNOMED_27113001",
+      "include_descendants": false,
+      "is_excluded": false
+    }
+  ],
+  "child_bundles": []
+}

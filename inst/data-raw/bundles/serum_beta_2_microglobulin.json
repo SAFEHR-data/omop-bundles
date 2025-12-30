@@ -1,0 +1,10 @@
+{
+  "concepts": [
+    {
+      "concept_key": "LOINC_14626-6",
+      "include_descendants": false,
+      "is_excluded": false
+    }
+  ],
+  "child_bundles": []
+}

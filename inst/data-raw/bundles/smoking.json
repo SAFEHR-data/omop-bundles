@@ -1,0 +1,35 @@
+{
+  "concepts": [
+    {
+      "concept_key": "SNOMED_281018007",
+      "include_descendants": false,
+      "is_excluded": false
+    },
+    {
+      "concept_key": "SNOMED_8392000",
+      "include_descendants": false,
+      "is_excluded": false
+    },
+    {
+      "concept_key": "SNOMED_365981007",
+      "include_descendants": false,
+      "is_excluded": false
+    },
+    {
+      "concept_key": "SNOMED_65568007",
+      "include_descendants": false,
+      "is_excluded": false
+    },
+    {
+      "concept_key": "SNOMED_77176002",
+      "include_descendants": false,
+      "is_excluded": false
+    },
+    {
+      "concept_key": "SNOMED_8517006",
+      "include_descendants": false,
+      "is_excluded": false
+    }
+  ],
+  "child_bundles": []
+}
