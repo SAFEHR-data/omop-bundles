@@ -17,12 +17,9 @@ concept_by_bundle(domain, id, version = "latest")
 A data frame with the concept data.
 }
 \description{
-Retrieves concept data for a specific bundle.
+\strong{Deprecated:} This function is deprecated. Use \code{\link{get_bundle_concepts}} instead.
 }
 \examples{
-# Usage with available_bundles, from a single row
-smoking <- available_bundles() |> dplyr::filter(bundle_name == "Smoking")
-concept_by_bundle(domain = smoking$domain, id = smoking$id, version = smoking$version)
-# Using if you know the details directly
-concept_by_bundle(domain = "observation", id = "smoking")
+# Deprecated - use get_bundle_concepts() instead
+# concept_by_bundle(domain = "observation", id = "smoking")
 }

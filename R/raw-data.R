@@ -26,7 +26,7 @@ raw_bundles <- function() {
 get_raw_dir <- function(..., version = "latest") {
   if (version != "latest") warning("Versioning not yet implemented, using version = 'latest'")
 
-  file_path <- system.file("data-raw", ..., package = "omopbundles")
+  file_path <- system.file("data-raw", "legacy", ..., package = "omopbundles")
 
   if (!file.exists(file_path)) {
     path <- paste(..., sep = "/")

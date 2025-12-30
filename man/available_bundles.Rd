@@ -13,9 +13,10 @@ available_bundles(version = "latest")
 dataframe that contains a "bundle_name", "version" and a "domain" column for each available bundle
 }
 \description{
-If a bundle has multiple names, then the id will be duplicated across rows
+\strong{Deprecated:} This function is deprecated. Use \code{\link{list_bundles}} instead.
 }
 \examples{
-available_bundles()
-available_bundles("0.1")
+# Deprecated - use list_bundles() instead
+# available_bundles()
+# available_bundles("0.1")
 }

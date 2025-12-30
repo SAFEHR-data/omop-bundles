@@ -6,15 +6,17 @@
 
 #' @title Get available bundles for a version
 #'
-#' @description If a bundle has multiple names, then the id will be duplicated across rows
+#' @description \strong{Deprecated:} This function is deprecated. Use \code{\link{list_bundles}} instead.
 #'
 #' @param version Requested version, if not defined, the latest will be used
 #' @return dataframe that contains a "bundle_name", "version" and a "domain" column for each available bundle
 #' @export
 #' @examples
-#' available_bundles()
-#' available_bundles("0.1")
+#' # Deprecated - use list_bundles() instead
+#' # available_bundles()
+#' # available_bundles("0.1")
 available_bundles <- function(version = "latest") {
+  warning("available_bundles() is deprecated. Use list_bundles() instead.", call. = FALSE)
   raw_dir <- get_raw_dir(version = version)
   directories <- dir(raw_dir, full.names = TRUE)
   bundle_name_paths <- file.path(directories, "bundle_names.csv")
@@ -27,7 +29,7 @@ available_bundles <- function(version = "latest") {
 
 #' @title Get concepts for a a single bundle row
 #'
-#' @description Retrieves concept data for a specific bundle.
+#' @description \strong{Deprecated:} This function is deprecated. Use \code{\link{get_bundle_concepts}} instead.
 #'
 #' @param domain The domain of the bundle.
 #' @param id The ID of the bundle.
@@ -35,12 +37,10 @@ available_bundles <- function(version = "latest") {
 #' @return A data frame with the concept data.
 #' @export
 #' @examples
-#' # Usage with available_bundles, from a single row
-#' smoking <- available_bundles() |> dplyr::filter(bundle_name == "Smoking")
-#' concept_by_bundle(domain = smoking$domain, id = smoking$id, version = smoking$version)
-#' # Using if you know the details directly
-#' concept_by_bundle(domain = "observation", id = "smoking")
+#' # Deprecated - use get_bundle_concepts() instead
+#' # concept_by_bundle(domain = "observation", id = "smoking")
 concept_by_bundle <- function(domain, id, version = "latest") {
+  warning("concept_by_bundle() is deprecated. Use get_bundle_concepts() instead.", call. = FALSE)
   get_raw_dir(version = version, domain, "bundles", glue::glue("{id}.csv")) |>
     readr::read_csv(show_col_types = FALSE) |>
     dplyr::mutate(domain = domain)
