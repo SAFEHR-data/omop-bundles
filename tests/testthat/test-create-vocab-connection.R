@@ -20,17 +20,11 @@ test_that("create_vocab_connection works with data frames", {
     stringsAsFactors = FALSE
   )
 
-  relationship_df <- data.frame(
-    concept_id_1 = integer(0),
-    concept_id_2 = integer(0),
-    relationship_id = character(0),
-    stringsAsFactors = FALSE
-  )
+
 
   cdm <- list(
     concept = concept_df,
-    concept_ancestor = ancestor_df,
-    concept_relationship = relationship_df
+    concept_ancestor = ancestor_df
   )
 
   vocab_conn <- create_vocab_connection(

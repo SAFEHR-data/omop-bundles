@@ -27,8 +27,7 @@
 #' # ancestor_df <- data.frame(...)
 #' # cdm <- list(
 #' #   concept = concept_df,
-#' #   concept_ancestor = ancestor_df,
-#' #   concept_relationship = relationship_df
+#' #   concept_ancestor = ancestor_df
 #' # )
 #' # vocab_conn <- create_vocab_connection(
 #' #   connection = cdm,
@@ -52,7 +51,7 @@ create_vocab_connection <- function(
 
   # Validate OMOP connection structure
   if (connection_type == "OMOP" && is.list(connection) && !inherits(connection, "data.frame")) {
-    required_tables <- c("concept", "concept_ancestor", "concept_relationship")
+    required_tables <- c("concept", "concept_ancestor")
     missing_tables <- setdiff(required_tables, names(connection))
     if (length(missing_tables) > 0) {
       stop(
