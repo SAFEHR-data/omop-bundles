@@ -2,49 +2,6 @@
 #' @importFrom dplyr mutate select coalesce
 #' @importFrom purrr map imap compact
 
-CONCEPT_FIELD_MAP <- c(
-  concept_name = "CONCEPT_NAME",
-  domain_id = "DOMAIN_ID",
-  vocabulary_id = "VOCABULARY_ID",
-  concept_code = "CONCEPT_CODE",
-  standard_concept = "STANDARD_CONCEPT",
-  invalid_reason = "INVALID_REASON",
-  valid_start_date = "VALID_START_DATE",
-  valid_end_date = "VALID_END_DATE"
-)
-
-#' @title Build concept object for Atlas concept set JSON
-#'
-#' @description Builds a concept object for the Atlas concept set JSON format
-#'
-#' @param row Data frame row containing concept metadata
-#'
-#' @return List containing concept object
-#' @noRd
-build_concept_obj <- function(row) {
-  optional <- imap(CONCEPT_FIELD_MAP, function(json_name, col_name) {
-    val <- row[[col_name]]
-    if (is.na(val)) {
-      return(NULL)
-    }
-    if (col_name %in% c("valid_start_date", "valid_end_date")) {
-      val <- as.character(val)
-    }
-    setNames(list(val), json_name)
-  })
-
-  c(list(CONCEPT_ID = row$concept_id), compact(optional))
-}
-
-build_atlas_item <- function(row, resolve_descendants) {
-  list(
-    concept = build_concept_obj(row),
-    isExcluded = FALSE,
-    includeDescendants = coalesce(row$include_descendants, resolve_descendants),
-    includeMapped = FALSE
-  )
-}
-
 #' @title Export bundle to Atlas concept set JSON format
 #'
 #' @description Exports a bundle to the Atlas concept set JSON format, which
@@ -52,7 +9,7 @@ build_atlas_item <- function(row, resolve_descendants) {
 #'
 #' @param bundle_id Character. Bundle ID to export
 #' @param vocab_connection Vocab connection object. Created using create_vocab_connection()
-#' @param include_descendants Logical. Whether to include descendants (default: TRUE)
+#' @param resolve_descendants Logical. Whether to resolve descendants (default: FALSE)
 #' @param file_path Character. Optional file path to save JSON
 #'
 #' @return JSON string (invisibly if file_path provided)
@@ -113,4 +70,48 @@ export_bundle_json <- function(
   # Write to file
   writeLines(json_string, file_path)
   invisible(json_string)
+}
+
+
+CONCEPT_FIELD_MAP <- c(
+  concept_name = "CONCEPT_NAME",
+  domain_id = "DOMAIN_ID",
+  vocabulary_id = "VOCABULARY_ID",
+  concept_code = "CONCEPT_CODE",
+  standard_concept = "STANDARD_CONCEPT",
+  invalid_reason = "INVALID_REASON",
+  valid_start_date = "VALID_START_DATE",
+  valid_end_date = "VALID_END_DATE"
+)
+
+#' @title Build concept object for Atlas concept set JSON
+#'
+#' @description Builds a concept object for the Atlas concept set JSON format
+#'
+#' @param row Data frame row containing concept metadata
+#'
+#' @return List containing concept object
+#' @noRd
+build_concept_obj <- function(row) {
+  optional <- imap(CONCEPT_FIELD_MAP, function(json_name, col_name) {
+    val <- row[[col_name]]
+    if (is.na(val)) {
+      return(NULL)
+    }
+    if (col_name %in% c("valid_start_date", "valid_end_date")) {
+      val <- as.character(val)
+    }
+    setNames(list(val), json_name)
+  })
+
+  c(list(CONCEPT_ID = row$concept_id), compact(optional))
+}
+
+build_atlas_item <- function(row, resolve_descendants) {
+  list(
+    concept = build_concept_obj(row),
+    isExcluded = FALSE,
+    includeDescendants = coalesce(row$include_descendants, resolve_descendants),
+    includeMapped = FALSE
+  )
 }
