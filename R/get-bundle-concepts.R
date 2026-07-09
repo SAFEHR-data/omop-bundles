@@ -231,11 +231,9 @@ get_bundle_concepts <- function(
     }
   }
 
-  result <- result |>
-    dplyr::filter(!.data$concept_id %in% excluded_ids)
-
-  # Remove duplicates and return
-  dplyr::distinct(result)
+result |>
+    dplyr::filter(!.data$concept_id %in% excluded_ids) |>
+    dplyr::distinct()
 }
 
 #' @title Resolve bundle hierarchy recursively

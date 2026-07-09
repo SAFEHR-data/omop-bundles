@@ -1,0 +1,17 @@
+{
+  "concepts": [
+    {
+      "concept_key": "C_ANCESTOR_100",
+      "include_descendants": true,
+      "is_excluded": false
+    },
+    {
+      "concept_key": "C_EXCLUDED_DESC_400",
+      "include_descendants": true,
+      "is_excluded": true
+    }
+  ],
+  "child_bundles": [],
+  "source_terminology": {}
+}
+

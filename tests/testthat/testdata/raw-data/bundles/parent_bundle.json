@@ -1,0 +1,24 @@
+{
+  "concepts": [
+    {
+      "concept_key": "C_PARENT_DIRECT_300",
+      "include_descendants": false,
+      "is_excluded": false
+    }
+  ],
+  "child_bundles": [
+    {
+      "child_bundle_id": "desc_bundle",
+      "is_excluded": false
+    },
+    {
+      "child_bundle_id": "non_desc_bundle",
+      "is_excluded": false
+    },
+    {
+      "child_bundle_id": "excluded_bundle",
+      "is_excluded": true
+    }
+  ],
+  "source_terminology": {}
+}
