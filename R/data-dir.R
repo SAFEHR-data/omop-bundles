@@ -4,7 +4,7 @@
 #'   be mocked in tests to use a temporary directory.
 #'
 #' @return Character string with path to data-raw directory
-#' @keywords internal
+#' @noRd
 get_data_raw_dir <- function() {
   data_dir <- system.file("data-raw", package = "omopbundles")
 

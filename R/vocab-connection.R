@@ -81,7 +81,7 @@ create_vocab_connection <- function(
 #'
 #' @param vocab_conn Vocab connection object created by create_vocab_connection()
 #' @return Concept table (data frame or database table reference)
-#' @keywords internal
+#' @noRd
 get_concept_table <- function(vocab_conn) {
   # Early exit for invalid connection object
   if (!inherits(vocab_conn, "vocab_connection")) {
@@ -109,7 +109,7 @@ get_concept_table <- function(vocab_conn) {
 #'
 #' @param vocab_conn Vocab connection object created by create_vocab_connection()
 #' @return Concept ancestor table (data frame or database table reference)
-#' @keywords internal
+#' @noRd
 get_concept_ancestor_table <- function(vocab_conn) {
   # Early exit for invalid connection object
   if (!inherits(vocab_conn, "vocab_connection")) {
@@ -140,7 +140,7 @@ get_concept_ancestor_table <- function(vocab_conn) {
 #' @param concept_code Character vector. Concept codes to resolve
 #' @param vocabulary_id Character vector. Vocabulary IDs corresponding to concept codes
 #' @return Data frame with concept_id, concept_code, vocabulary_id
-#' @keywords internal
+#' @noRd
 resolve_concept_code <- function(vocab_conn, concept_code, vocabulary_id) {
   # Early exit for invalid connection object
   if (!inherits(vocab_conn, "vocab_connection")) {

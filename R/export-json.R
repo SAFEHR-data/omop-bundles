@@ -13,6 +13,14 @@ CONCEPT_FIELD_MAP <- c(
   valid_end_date = "VALID_END_DATE"
 )
 
+#' @title Build concept object for Atlas concept set JSON
+#'
+#' @description Builds a concept object for the Atlas concept set JSON format
+#'
+#' @param row Data frame row containing concept metadata
+#'
+#' @return List containing concept object
+#' @noRd
 build_concept_obj <- function(row) {
   optional <- imap(CONCEPT_FIELD_MAP, function(json_name, col_name) {
     val <- row[[col_name]]

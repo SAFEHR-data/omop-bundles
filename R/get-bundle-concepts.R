@@ -245,7 +245,7 @@ result |>
 #' @param bundle_hierarchy Data frame. Bundle hierarchy relationships
 #' @param bundles Data frame. All bundles
 #' @return Character vector of all bundle IDs (including children)
-#' @keywords internal
+#' @noRd
 resolve_bundle_hierarchy <- function(bundle_ids, bundle_hierarchy, bundles) {
   all_bundle_ids <- bundle_ids
   to_process <- bundle_ids
@@ -273,7 +273,7 @@ resolve_bundle_hierarchy <- function(bundle_ids, bundle_hierarchy, bundles) {
 #' @param vocab_conn Vocab connection object
 #' @param concept_ids Integer vector. Concept IDs to expand
 #' @return Integer vector of all concept IDs (including descendants)
-#' @keywords internal
+#' @noRd
 expand_descendants <- function(vocab_conn, concept_ids) {
   # Early exit for unsupported connection types
   if (vocab_conn$connection_type != "OMOP") {
@@ -305,7 +305,7 @@ expand_descendants <- function(vocab_conn, concept_ids) {
 #' @param vocab_conn Vocab connection object
 #' @param concept_ids Integer vector. Concept IDs to retrieve
 #' @return Data frame with concept metadata
-#' @keywords internal
+#' @noRd
 get_concept_metadata <- function(vocab_conn, concept_ids) {
   concept_table <- get_concept_table(vocab_conn)
 
