@@ -17,13 +17,12 @@ test_that("get_bundle_concepts expands hierarchy, descendants, and exclusions", 
       return_metadata = TRUE
     )
   )
-  # include C_PARENT_DIRECT_300 but no descendants
-  # include C_ANCESTOR_100 and descendants
+  # include C_ANCESTOR_100 and descendants 101 and 102
   # include C_LEAF_200 but not descendants
+  # include C_PARENT_DIRECT_300 but no descendants
+  expect_setequal(concepts$concept_id, c(100, 101, 102, 200, 300))
   # exclude C_EXCLUDED_DESC_400 and descendants
   # exclude C_EXCLUDED_CHILD_500
-  expect_setequal(concepts$concept_id, c(100, 101, 102, 200, 300))
-  # exclude 400 and descendants (401 and 402)
   expect_false(any(concepts$concept_id %in% c(301, 400, 401, 500)))
 })
 
