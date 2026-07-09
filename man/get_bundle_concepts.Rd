@@ -7,8 +7,8 @@
 get_bundle_concepts(
   bundle_id,
   vocab_connection,
-  include_descendants = NULL,
-  expand_hierarchy = TRUE,
+  resolve_descendants = NULL,
+  expand_bundle_hierarchy = TRUE,
   return_metadata = TRUE
 )
 }
@@ -17,10 +17,10 @@ get_bundle_concepts(
 
 \item{vocab_connection}{Vocab connection object. Created using create_vocab_connection()}
 
-\item{include_descendants}{Logical. Whether to include descendants
-(overrides bundle-level settings if TRUE)}
+\item{resolve_descendants}{Logical. Whether use the vocabulary hierarchy to find the individual
+child concept ids for any concept with include_descendants=TRUE in its definition}
 
-\item{expand_hierarchy}{Logical. Whether to expand child bundles (default: TRUE)}
+\item{expand_bundle_hierarchy}{Logical. Whether to expand child bundles (default: TRUE)}
 
 \item{return_metadata}{Logical. Whether to include concept metadata (default: TRUE)}
 }
@@ -32,7 +32,7 @@ Data frame with columns:
 }
 \description{
 Retrieves explicit concepts for one or more bundles, optionally
-  expanding hierarchical bundles and including descendants.
+  expanding hierarchical bundles and resolving descendants.
 }
 \examples{
 # Create vocab connection for OMOP
@@ -41,11 +41,11 @@ Retrieves explicit concepts for one or more bundles, optionally
 #   connection_type = "OMOP"
 # )
 
-# Get concepts for a single bundle
+# Get concepts for a single bundle, resolving descendants
 # concepts <- get_bundle_concepts(
 #   bundle_id = "homeless",
 #   vocab_connection = vocab_conn,
-#   include_descendants = TRUE
+#   resolve_descendants = TRUE
 # )
 
 # Get concepts for multiple bundles
@@ -58,6 +58,6 @@ Retrieves explicit concepts for one or more bundles, optionally
 # concepts <- get_bundle_concepts(
 #   bundle_id = "homeless_comprehensive",
 #   vocab_connection = vocab_conn,
-#   expand_hierarchy = FALSE
+#   expand_bundle_hierarchy = FALSE
 # )
 }

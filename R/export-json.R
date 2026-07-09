@@ -1,5 +1,41 @@
 #' @importFrom jsonlite toJSON
-#' @importFrom dplyr mutate select
+#' @importFrom dplyr mutate select coalesce
+#' @importFrom purrr map imap compact
+
+CONCEPT_FIELD_MAP <- c(
+  concept_name = "CONCEPT_NAME",
+  domain_id = "DOMAIN_ID",
+  vocabulary_id = "VOCABULARY_ID",
+  concept_code = "CONCEPT_CODE",
+  standard_concept = "STANDARD_CONCEPT",
+  invalid_reason = "INVALID_REASON",
+  valid_start_date = "VALID_START_DATE",
+  valid_end_date = "VALID_END_DATE"
+)
+
+build_concept_obj <- function(row) {
+  optional <- imap(CONCEPT_FIELD_MAP, function(json_name, col_name) {
+    val <- row[[col_name]]
+    if (is.na(val)) {
+      return(NULL)
+    }
+    if (col_name %in% c("valid_start_date", "valid_end_date")) {
+      val <- as.character(val)
+    }
+    setNames(list(val), json_name)
+  })
+
+  c(list(CONCEPT_ID = row$concept_id), compact(optional))
+}
+
+build_atlas_item <- function(row, resolve_descendants) {
+  list(
+    concept = build_concept_obj(row),
+    isExcluded = FALSE,
+    includeDescendants = coalesce(row$include_descendants, resolve_descendants),
+    includeMapped = FALSE
+  )
+}
 
 #' @title Export bundle to Atlas concept set JSON format
 #'
@@ -36,68 +72,22 @@
 export_bundle_json <- function(
   bundle_id,
   vocab_connection,
-  include_descendants = TRUE,
+  resolve_descendants = TRUE,
   file_path = NULL
 ) {
   # Get bundle concepts
   concepts <- get_bundle_concepts(
     bundle_id = bundle_id,
     vocab_connection = vocab_connection,
-    include_descendants = include_descendants,
-    expand_hierarchy = TRUE,
+    resolve_descendants = resolve_descendants,
+    expand_bundle_hierarchy = TRUE,
     return_metadata = TRUE
   )
 
-  # Format as Atlas concept set JSON structure
-  # Create list of items, each with a concept object
-  items_list <- lapply(seq_len(nrow(concepts)), function(i) {
-    concept_row <- concepts[i, ]
-
-    # Build concept object (only include fields that exist)
-    concept_obj <- list(
-      CONCEPT_ID = concept_row$concept_id
-    )
-
-    # Add optional fields if they exist
-    if (!is.null(concept_row$concept_name) && !is.na(concept_row$concept_name)) {
-      concept_obj$CONCEPT_NAME <- concept_row$concept_name
-    }
-    if (!is.null(concept_row$domain_id) && !is.na(concept_row$domain_id)) {
-      concept_obj$DOMAIN_ID <- concept_row$domain_id
-    }
-    if (!is.null(concept_row$vocabulary_id) && !is.na(concept_row$vocabulary_id)) {
-      concept_obj$VOCABULARY_ID <- concept_row$vocabulary_id
-    }
-    if (!is.null(concept_row$concept_code) && !is.na(concept_row$concept_code)) {
-      concept_obj$CONCEPT_CODE <- concept_row$concept_code
-    }
-    if (!is.null(concept_row$standard_concept) && !is.na(concept_row$standard_concept)) {
-      concept_obj$STANDARD_CONCEPT <- concept_row$standard_concept
-    }
-    if (!is.null(concept_row$invalid_reason) && !is.na(concept_row$invalid_reason)) {
-      concept_obj$INVALID_REASON <- concept_row$invalid_reason
-    }
-    if (!is.null(concept_row$valid_start_date) && !is.na(concept_row$valid_start_date)) {
-      concept_obj$VALID_START_DATE <- as.character(concept_row$valid_start_date)
-    }
-    if (!is.null(concept_row$valid_end_date) && !is.na(concept_row$valid_end_date)) {
-      concept_obj$VALID_END_DATE <- as.character(concept_row$valid_end_date)
-    }
-
-    # Determine includeDescendants
-    inc_desc <- dplyr::if_else(
-      is.na(concept_row$include_descendants),
-      include_descendants,
-      concept_row$include_descendants
-    )
-
-    list(
-      concept = concept_obj,
-      isExcluded = FALSE,
-      includeDescendants = inc_desc,
-      includeMapped = FALSE
-    )
-  })
+  items_list <- map(
+    seq_len(nrow(concepts)),
+    ~ build_atlas_item(concepts[.x, ], resolve_descendants)
+  )
 
   json_structure <- list(items = items_list)
   json_string <- jsonlite::toJSON(

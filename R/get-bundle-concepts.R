@@ -5,13 +5,13 @@
 #' @title Get explicit concepts for a bundle
 #'
 #' @description Retrieves explicit concepts for one or more bundles, optionally
-#'   expanding hierarchical bundles and including descendants.
+#'   expanding hierarchical bundles and resolving descendants.
 #'
 #' @param bundle_id Character or character vector. Bundle ID(s) to query
 #' @param vocab_connection Vocab connection object. Created using create_vocab_connection()
-#' @param include_descendants Logical. Whether to include descendants
-#'   (overrides bundle-level settings if TRUE)
-#' @param expand_hierarchy Logical. Whether to expand child bundles (default: TRUE)
+#' @param resolve_descendants Logical. Whether use the vocabulary hierarchy to find the individual
+#'   child concept ids for any concept with include_descendants=TRUE in its definition
+#' @param expand_bundle_hierarchy Logical. Whether to expand child bundles (default: TRUE)
 #' @param return_metadata Logical. Whether to include concept metadata (default: TRUE)
 #'
 #' @return Data frame with columns:
@@ -28,11 +28,11 @@
 #' #   connection_type = "OMOP"
 #' # )
 #'
-#' # Get concepts for a single bundle
+#' # Get concepts for a single bundle, resolving descendants
 #' # concepts <- get_bundle_concepts(
 #' #   bundle_id = "homeless",
 #' #   vocab_connection = vocab_conn,
-#' #   include_descendants = TRUE
+#' #   resolve_descendants = TRUE
 #' # )
 #'
 #' # Get concepts for multiple bundles
@@ -45,13 +45,13 @@
 #' # concepts <- get_bundle_concepts(
 #' #   bundle_id = "homeless_comprehensive",
 #' #   vocab_connection = vocab_conn,
-#' #   expand_hierarchy = FALSE
+#' #   expand_bundle_hierarchy = FALSE
 #' # )
 get_bundle_concepts <- function(
   bundle_id,
   vocab_connection,
-  include_descendants = NULL,
-  expand_hierarchy = TRUE,
+  resolve_descendants = NULL,
+  expand_bundle_hierarchy = TRUE,
   return_metadata = TRUE
 ) {
   # Early exit for invalid inputs
@@ -87,7 +87,7 @@ get_bundle_concepts <- function(
   }
 
   # Resolve hierarchy if requested
-  all_bundle_ids <- if (expand_hierarchy) {
+  all_bundle_ids <- if (expand_bundle_hierarchy) {
     resolve_bundle_hierarchy(bundle_id, bundle_hierarchy, bundles)
   } else {
     bundle_id
@@ -143,11 +143,11 @@ get_bundle_concepts <- function(
   }
 
   # Determine which concepts need descendants expanded
-  concepts_to_expand <- if (is.null(include_descendants)) {
+  concepts_to_expand <- if (is.null(resolve_descendants)) {
     # Use bundle-level settings
     included_with_concepts |>
-      dplyr::filter(include_descendants == TRUE)
-  } else if (include_descendants) {
+      dplyr::filter(.data$include_descendants == TRUE)
+  } else if (resolve_descendants) {
     # Expand all concepts
     included_with_concepts
   } else {

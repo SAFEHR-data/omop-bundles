@@ -26,14 +26,14 @@ test_that("get_bundle_concepts expands hierarchy, descendants, and exclusions", 
   expect_false(any(concepts$concept_id %in% c(301, 400, 401, 500)))
 })
 
-test_that("include_descendants = FALSE overrides bundle defaults", {
+test_that("resolve_descendants = FALSE overrides bundle defaults", {
   concepts <- with_mocked_bindings(
     get_data_raw_dir = function() temp_raw_dir,
     get_bundle_concepts(
       bundle_id = "desc_bundle",
       vocab_connection = vocab_conn,
-      include_descendants = FALSE,
-      expand_hierarchy = FALSE,
+      resolve_descendants = FALSE,
+      expand_bundle_hierarchy = FALSE,
       return_metadata = TRUE
     )
   )
@@ -42,13 +42,13 @@ test_that("include_descendants = FALSE overrides bundle defaults", {
   expect_false(any(concepts$concept_id %in% c(101, 102)))
 })
 
-test_that("expand_hierarchy = FALSE limits to the requested bundle", {
+test_that("expand_bundle_hierarchy = FALSE limits to the requested bundle", {
   concepts <- with_mocked_bindings(
     get_data_raw_dir = function() temp_raw_dir,
     get_bundle_concepts(
       bundle_id = "parent_bundle",
       vocab_connection = vocab_conn,
-      expand_hierarchy = FALSE,
+      expand_bundle_hierarchy = FALSE,
       return_metadata = TRUE
     )
   )

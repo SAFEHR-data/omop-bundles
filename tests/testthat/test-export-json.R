@@ -23,7 +23,7 @@ test_that("export_bundle_json exports hierarchy, descendants, and exclusions", {
     integer(1)
   ))
 
-  # include C_PARENT_DIRECT_300 and descendants (default include_descendants = TRUE)
+  # include C_PARENT_DIRECT_300 and descendants
   # include C_ANCESTOR_100 and descendants
   # include C_LEAF_200 and descendants
   # exclude C_EXCLUDED_DESC_400 and descendants
@@ -34,7 +34,7 @@ test_that("export_bundle_json exports hierarchy, descendants, and exclusions", {
   for (item in parsed$items) {
     expect_false(item$isExcluded)
     expect_false(item$includeMapped)
-    expect_true(all(c("concept", "isExcluded", "includeDescendants", "includeMapped") %in% names(item)))
+    expect_setequal(names(item), c("concept", "isExcluded", "includeDescendants", "includeMapped"))
   }
 
   include_descendants_by_id <- stats::setNames(
