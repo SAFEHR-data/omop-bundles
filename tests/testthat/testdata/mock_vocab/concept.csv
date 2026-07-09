@@ -1,0 +1,16 @@
+concept_id,concept_name,domain_id,vocabulary_id,concept_code,standard_concept,invalid_reason,valid_start_date,valid_end_date
+100,Ancestor concept,Measurement,TEST,100,S,,2020-01-01,2099-12-31
+101,Descendant A,Measurement,TEST,101,S,,2020-01-01,2099-12-31
+102,Descendant B,Measurement,TEST,102,S,,2020-01-01,2099-12-31
+200,Leaf concept,Measurement,TEST,200,S,,2020-01-01,2099-12-31
+201,Leaf concept 01,Measurement,TEST,201,S,,2020-01-01,2099-12-31
+202,Leaf concept 02,Measurement,TEST,202,S,,2020-01-01,2099-12-31
+300,Parent direct concept,Measurement,TEST,300,S,,2020-01-01,2099-12-31
+301,Parent direct concept 01,Measurement,TEST,301,S,,2020-01-01,2099-12-31
+302,Parent direct concept 02,Measurement,TEST,302,S,,2020-01-01,2099-12-31
+400,Excluded ancestor,Measurement,TEST,400,S,,2020-01-01,2099-12-31
+401,Excluded descendant,Measurement,TEST,401,S,,2020-01-01,2099-12-31
+402,Excluded descendant 02,Measurement,TEST,402,S,,2020-01-01,2099-12-31
+500,Excluded child bundle concept,Measurement,TEST,500,S,,2020-01-01,2099-12-31
+501,Excluded child bundle concept 01,Measurement,TEST,501,S,,2020-01-01,2099-12-31
+502,Excluded child bundle concept 02,Measurement,TEST,502,S,,2020-01-01,2099-12-31

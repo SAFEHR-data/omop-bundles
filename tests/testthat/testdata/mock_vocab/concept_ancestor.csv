@@ -1,0 +1,11 @@
+ancestor_concept_id,descendant_concept_id,min_levels_of_separation,max_levels_of_separation
+100,101,1,1
+100,102,1,2
+200,201,1,1
+200,202,1,2
+300,301,1,1
+300,302,1,2
+400,401,1,1
+400,402,1,2
+500,501,1,1
+500,502,1,2
