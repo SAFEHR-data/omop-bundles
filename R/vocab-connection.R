@@ -16,7 +16,11 @@
 #'
 #' @examples
 #' # CDM connection for OMOP
-#' # cdm <- CDMConnector::cdmFromCon(con, cdmName = "eunomia", cdmSchema = "main", writeSchema = "main")
+#' # cdm <- CDMConnector::cdmFromCon(con, 
+#' #   cdmName = "eunomia", 
+#' #   cdmSchema = "main",
+#' #   writeSchema = "main"
+#' # )
 #' # vocab_conn <- create_vocab_connection(
 #' #   connection = cdm,
 #' #   connection_type = "OMOP"

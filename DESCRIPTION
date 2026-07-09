@@ -1,7 +1,7 @@
 Package: omopbundles
 Type: Package
 Title: Bundles of OMOP Concepts for Ease of Data Selection
-Version: 0.1.0
+Version: 0.2.0
 Authors@R: person('Stef', 'Piatek', email = 'stefan.piatek@nhs.net', role = c('cre', 'aut'))
 Description: Bundles of OMOP Concepts for Ease of Data Selection.
 License: Apache License (>= 2)
@@ -14,7 +14,8 @@ Imports:
   purrr (>= 1.0),
   readr (>= 2.0),
   rlang (>= 1.0),
-  vroom (>= 1.0)
+  vroom (>= 1.0),
+  methods
 Suggests:
   devtools,
   pak,
@@ -23,6 +24,7 @@ Suggests:
   stringr,
   styler,
   testthat (>= 3.0.0),
-  usethis
+  usethis, 
+  withr
 Config/testthat/edition: 3
-RoxygenNote: 7.3.3
+RoxygenNote: 8.0.0
