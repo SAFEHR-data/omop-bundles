@@ -141,5 +141,6 @@
       "is_excluded": false
     }
   ],
-  "child_bundles": []
+  "child_bundles": [],
+  "source_terminology": {}
 }
