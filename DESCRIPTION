@@ -10,8 +10,10 @@ LazyData: true
 Imports:
   dplyr (>= 1.0),
   glue (>= 1.0),
+  jsonlite (>= 1.8),
   purrr (>= 1.0),
   readr (>= 2.0),
+  rlang (>= 1.0),
   vroom (>= 1.0)
 Suggests:
   devtools,
@@ -23,4 +25,4 @@ Suggests:
   testthat (>= 3.0.0),
   usethis
 Config/testthat/edition: 3
-RoxygenNote: 7.3.2
+RoxygenNote: 7.3.3
