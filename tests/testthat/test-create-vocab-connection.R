@@ -1,3 +1,5 @@
+library(arrow)
+
 test_that("create_vocab_connection works with data frames", {
   concept_df <- data.frame(
     concept_id = c(4092281, 4222303),
@@ -33,6 +35,25 @@ test_that("create_vocab_connection works with data frames", {
 
   expect_s3_class(vocab_conn, "vocab_connection")
   expect_equal(vocab_conn$connection_type, "OMOP")
+})
+
+test_that("create_vocab_connection works with Arrow datasets", {
+
+  cdm <- list(
+    concept = read_parquet(testthat::test_path("testdata/vocab-parquet/concept.parquet")),
+    concept_ancestor = read_parquet(testthat::test_path("testdata/vocab-parquet/concept_ancestor.parquet"))
+  )
+
+  vocab_conn <- create_vocab_connection(
+    connection = cdm,
+    connection_type = "OMOP"
+  )
+
+  pulse_rate_id <- 4301868
+
+  metadata <- get_concept_metadata(vocab_conn, pulse_rate_id)
+
+  expect_equal(metadata$concept_name, "Pulse rate")
 })
 
 test_that("create_vocab_connection rejects SNOMED", {

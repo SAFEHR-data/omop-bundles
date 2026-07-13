@@ -287,9 +287,10 @@ expand_descendants <- function(vocab_conn, concept_ids) {
     stop("Database connection descendant expansion not yet fully implemented")
   }
 
-  # Handle data frame case
+  # Handle data frame or Arrow datasets
   descendants <- ancestor_table |>
     dplyr::filter(.data$ancestor_concept_id %in% concept_ids) |>
+    dplyr::collect() |>
     dplyr::pull(.data$descendant_concept_id) |>
     unique()
 
@@ -328,5 +329,6 @@ get_concept_metadata <- function(vocab_conn, concept_ids) {
       "valid_start_date",
       "valid_end_date"
     ) |>
-    dplyr::distinct(.data$concept_id, .keep_all = TRUE)
+    dplyr::distinct(.data$concept_id, .keep_all = TRUE) |>
+    dplyr::collect()
 }
