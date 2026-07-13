@@ -294,6 +294,11 @@
       ],
       "Hash": "892124978869b74935dc3934c42bfe5a"
     },
+    "testthat": {
+      "Package": "testthat",
+      "Version": "3.3.2",
+      "Source": "Repository"
+    },
     "tibble": {
       "Package": "tibble",
       "Version": "3.3.0",
