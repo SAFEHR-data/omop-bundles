@@ -73,7 +73,7 @@ export_bundle_json <- function(
 }
 
 
-CONCEPT_FIELD_MAP <- c(
+concept_field_map <- c(
   concept_name = "CONCEPT_NAME",
   domain_id = "DOMAIN_ID",
   vocabulary_id = "VOCABULARY_ID",
@@ -93,7 +93,7 @@ CONCEPT_FIELD_MAP <- c(
 #' @return List containing concept object
 #' @noRd
 build_concept_obj <- function(row) {
-  optional <- imap(CONCEPT_FIELD_MAP, function(json_name, col_name) {
+  optional <- imap(concept_field_map, function(json_name, col_name) {
     val <- row[[col_name]]
     if (is.na(val)) {
       return(NULL)

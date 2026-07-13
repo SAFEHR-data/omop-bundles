@@ -6,7 +6,8 @@ vocab_conn <- create_mock_vocab_connection()
 test_that("get_bundle_concepts expands hierarchy, descendants, and exclusions", {
   # Given a bundle structure with a parent bundle, a descendant bundle, a non-descendant bundle, and an excluded bundle
   # When we get the concepts for the parent bundle
-  # Then we should get the concepts for the parent bundle, the descendant bundle, the non-descendant bundle, and the excluded bundle
+  # Then we should get the concepts for the parent bundle,
+  #   the descendant bundle, the non-descendant bundle, and the excluded bundle
   # - should not have the non-descendant bundle concepts
   # - should not have the excluded bundle concepts
   concepts <- with_mocked_bindings(

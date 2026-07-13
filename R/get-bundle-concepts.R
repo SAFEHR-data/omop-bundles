@@ -221,7 +221,7 @@ get_bundle_concepts <- function(
 
   # Expand excluded descendants if needed
   excluded_to_expand <- excluded_with_concepts |>
-    dplyr::filter(include_descendants == TRUE)
+    dplyr::filter(.data$include_descendants == TRUE)
 
   if (nrow(excluded_to_expand) > 0 && vocab_connection$connection_type == "OMOP") {
     excluded_ids_to_expand <- unique(excluded_to_expand$concept_id[!is.na(excluded_to_expand$concept_id)])

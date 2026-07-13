@@ -52,7 +52,7 @@ copy_mock_raw_data_files <- function(mock_directory = "raw-data") {
   # Default bundle hierarchy:
   #
   # parent_bundle
-  #   - concept: C_PARENT_DIRECT_300 (include_descendants = FALSE, is_excluded = FALSE)
+  # ├─ concept: C_PARENT_DIRECT_300 (include_descendants = FALSE, is_excluded = FALSE)
   # ├─(included)── desc_bundle (bundle with descendants)
   # │                ├─ concept: C_ANCESTOR_100 (include_descendants = TRUE, is_excluded = FALSE)
   # │                └─ concept: C_EXCLUDED_DESC_400 (include_descendants = TRUE, is_excluded = TRUE)
