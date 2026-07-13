@@ -1,0 +1,41 @@
+{
+  "concepts": [
+    {
+      "concept_key": "LOINC_14683-7",
+      "include_descendants": false,
+      "is_excluded": false
+    },
+    {
+      "concept_key": "LOINC_2888-6",
+      "include_descendants": false,
+      "is_excluded": false
+    },
+    {
+      "concept_key": "LOINC_40486-3",
+      "include_descendants": false,
+      "is_excluded": false
+    },
+    {
+      "concept_key": "LOINC_1928-1",
+      "include_descendants": false,
+      "is_excluded": false
+    },
+    {
+      "concept_key": "LOINC_1929-9",
+      "include_descendants": false,
+      "is_excluded": false
+    },
+    {
+      "concept_key": "LOINC_49908-7",
+      "include_descendants": false,
+      "is_excluded": false
+    },
+    {
+      "concept_key": "LOINC_46084-0",
+      "include_descendants": false,
+      "is_excluded": false
+    }
+  ],
+  "child_bundles": [],
+  "source_terminology": {}
+}

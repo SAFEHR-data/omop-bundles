@@ -1,0 +1,16 @@
+{
+  "concepts": [
+    {
+      "concept_key": "LOINC_99597-7",
+      "include_descendants": false,
+      "is_excluded": false
+    },
+    {
+      "concept_key": "LOINC_99596-9",
+      "include_descendants": false,
+      "is_excluded": false
+    }
+  ],
+  "child_bundles": [],
+  "source_terminology": {}
+}

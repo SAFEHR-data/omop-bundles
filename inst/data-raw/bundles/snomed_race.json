@@ -1,0 +1,96 @@
+{
+  "concepts": [
+    {
+      "concept_key": "SNOMED_1024701000000100",
+      "include_descendants": false,
+      "is_excluded": false
+    },
+    {
+      "concept_key": "SNOMED_976571000000100",
+      "include_descendants": false,
+      "is_excluded": false
+    },
+    {
+      "concept_key": "SNOMED_976631000000101",
+      "include_descendants": false,
+      "is_excluded": false
+    },
+    {
+      "concept_key": "SNOMED_976651000000108",
+      "include_descendants": false,
+      "is_excluded": false
+    },
+    {
+      "concept_key": "SNOMED_976691000000100",
+      "include_descendants": false,
+      "is_excluded": false
+    },
+    {
+      "concept_key": "SNOMED_976711000000103",
+      "include_descendants": false,
+      "is_excluded": false
+    },
+    {
+      "concept_key": "SNOMED_976731000000106",
+      "include_descendants": false,
+      "is_excluded": false
+    },
+    {
+      "concept_key": "SNOMED_976751000000104",
+      "include_descendants": false,
+      "is_excluded": false
+    },
+    {
+      "concept_key": "SNOMED_976771000000108",
+      "include_descendants": false,
+      "is_excluded": false
+    },
+    {
+      "concept_key": "SNOMED_976791000000107",
+      "include_descendants": false,
+      "is_excluded": false
+    },
+    {
+      "concept_key": "SNOMED_976811000000108",
+      "include_descendants": false,
+      "is_excluded": false
+    },
+    {
+      "concept_key": "SNOMED_976831000000100",
+      "include_descendants": false,
+      "is_excluded": false
+    },
+    {
+      "concept_key": "SNOMED_976851000000107",
+      "include_descendants": false,
+      "is_excluded": false
+    },
+    {
+      "concept_key": "SNOMED_976871000000103",
+      "include_descendants": false,
+      "is_excluded": false
+    },
+    {
+      "concept_key": "SNOMED_976891000000104",
+      "include_descendants": false,
+      "is_excluded": false
+    },
+    {
+      "concept_key": "SNOMED_976911000000101",
+      "include_descendants": false,
+      "is_excluded": false
+    },
+    {
+      "concept_key": "SNOMED_976931000000109",
+      "include_descendants": false,
+      "is_excluded": false
+    },
+    {
+      "concept_key": "SNOMED_976971000000106",
+      "include_descendants": false,
+      "is_excluded": false
+    }
+  ],
+  "child_bundles": [],
+  "source_terminology": {}
+}

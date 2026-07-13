@@ -1,0 +1,11 @@
+{
+  "concepts": [
+    {
+      "concept_key": "C_EXCLUDED_CHILD_500",
+      "include_descendants": false,
+      "is_excluded": false
+    }
+  ],
+  "child_bundles": [],
+  "source_terminology": {}
+}

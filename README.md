@@ -10,12 +10,13 @@ Catalogue of omop concepts grouped into useful bundles to help researchers selec
 ## Overview
 
 1. [Installation](#installation)
-2. [Development](#development)
+1. [Quickstart](#quickstart)
+1. [Development](#development)
     - [Set up](#set-up)
     - [Updating the `renv` lockfile](#updating-the-renv-lockfile)
     - [Design](#design)
     - [Coding style](#coding-style)
-3. [Deployment](./deploy/README.md)
+1. [Deployment](./deploy/README.md)
 
 ## Installation
 
@@ -25,6 +26,73 @@ You can install the development version of data-catalogue from within R:
 # install.packages("pak")
 pak::pak("SAFEHR-data/omop-bundles")
 ```
+
+## Quickstart
+
+Load the package and inspect the available bundles:
+
+```r
+library(omopbundles)
+
+bundles <- list_bundles()
+```
+
+To retrieve concepts, create a vocabulary connection from the OMOP `concept`
+and `concept_ancestor` tables. These can either be data frames or lazily loaded parquet files. 
+At UCLH we have [preprocessed vocabularies available](https://github.com/SAFEHR-data/omop-vocabs-processed)
+for this. 
+
+```r
+vocab_connection <- create_vocab_connection(
+  connection = list(
+    concept = concept,
+    concept_ancestor = concept_ancestor
+  ),
+  connection_type = "OMOP"
+)
+```
+
+Use a `bundle_id` returned by `list_bundles()` to retrieve its OMOP concepts:
+
+```r
+concepts <- get_bundle_concepts(
+  bundle_id = "smoking",
+  vocab_connection = vocab_connection
+)
+```
+
+By default, child bundles are included and each bundle's descendant settings
+are respected. These behaviours can be overridden:
+
+```r
+concept_ids <- get_bundle_concepts(
+  bundle_id = c("smoking", "HBA1c"),
+  vocab_connection = vocab_connection,
+  resolve_descendants = FALSE,
+  expand_bundle_hierarchy = FALSE,
+  return_metadata = FALSE
+)
+```
+
+Export a bundle as an OHDSI Atlas concept set, either as a JSON string or
+directly to a file:
+
+```r
+atlas_json <- export_bundle_json(
+  bundle_id = "smoking",
+  vocab_connection = vocab_connection,
+  resolve_descendants = TRUE
+)
+
+export_bundle_json(
+  bundle_id = "smoking",
+  vocab_connection = vocab_connection,
+  resolve_descendants = TRUE,
+  file_path = "smoking-concept-set.json"
+)
+```
+
+Full documentation is available within R. e.g. `?list_bundles()`
 
 ## Development
 

@@ -1,27 +1,30 @@
 Package: omopbundles
 Type: Package
 Title: Bundles of OMOP Concepts for Ease of Data Selection
-Version: 0.1.1
+Version: 0.2.0
 Authors@R: person('Stef', 'Piatek', email = 'stefan.piatek@nhs.net', role = c('cre', 'aut'))
 Description: Bundles of OMOP Concepts for Ease of Data Selection.
 License: Apache License (>= 2)
 Encoding: UTF-8
 LazyData: true
 Imports:
-    dplyr (>= 1.0),
-    glue (>= 1.0),
-    purrr (>= 1.0),
-    readr (>= 2.0),
-    rlang (>= 1.1),
-    vroom (>= 1.0)
+  dplyr (>= 1.0),
+  glue (>= 1.0),
+  jsonlite (>= 1.8),
+  purrr (>= 1.0),
+  readr (>= 2.0),
+  rlang (>= 1.0),
+  methods
 Suggests:
-    devtools,
-    pak,
-    pkgload,
-    lintr,
-    stringr,
-    styler,
-    testthat (>= 3.0.0),
-    usethis
+  arrow,
+  devtools,
+  pak,
+  pkgload,
+  lintr,
+  stringr,
+  styler,
+  testthat (>= 3.0.0),
+  usethis, 
+  withr
 Config/testthat/edition: 3
-RoxygenNote: 7.3.2
+RoxygenNote: 8.0.0
