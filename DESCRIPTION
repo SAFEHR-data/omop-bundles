@@ -16,6 +16,7 @@ Imports:
   rlang (>= 1.0),
   methods
 Suggests:
+  arrow,
   devtools,
   pak,
   pkgload,

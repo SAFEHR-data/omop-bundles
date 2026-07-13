@@ -19,6 +19,11 @@
       ],
       "Hash": "d4335fe7207f1c01ab8c41762f5840d4"
     },
+    "arrow": {
+      "Package": "arrow",
+      "Version": "24.0.0",
+      "Source": "Repository"
+    },
     "bit": {
       "Package": "bit",
       "Version": "4.6.0",
