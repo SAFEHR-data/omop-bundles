@@ -27,7 +27,7 @@ empty_child_bundles_df <- function() {
 
 #' @title Empty child bundles data frame for JSON write
 #' @noRd
-empty_child_bundles_for_json_df <- function() {
+empty_children_json_df <- function() {
   data.frame(
     child_bundle_id = character(0),
     is_excluded = logical(0),
@@ -37,7 +37,7 @@ empty_child_bundles_for_json_df <- function() {
 
 #' @title Empty bundle concepts data frame for JSON write
 #' @noRd
-empty_bundle_concepts_for_json_df <- function() {
+empty_concepts_json_df <- function() {
   data.frame(
     concept_key = character(0),
     include_descendants = logical(0),

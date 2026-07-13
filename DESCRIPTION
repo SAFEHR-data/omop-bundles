@@ -14,7 +14,6 @@ Imports:
   purrr (>= 1.0),
   readr (>= 2.0),
   rlang (>= 1.0),
-  vroom (>= 1.0),
   methods
 Suggests:
   devtools,

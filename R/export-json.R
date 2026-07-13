@@ -1,6 +1,7 @@
 #' @importFrom jsonlite toJSON
 #' @importFrom dplyr mutate select coalesce
 #' @importFrom purrr map imap compact
+#' @importFrom stats setNames
 
 #' @title Export bundle to Atlas concept set JSON format
 #'
