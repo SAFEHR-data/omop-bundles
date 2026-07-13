@@ -22,8 +22,8 @@ Creates a vocabulary connection object that encapsulates the
 }
 \examples{
 # CDM connection for OMOP
-# cdm <- CDMConnector::cdmFromCon(con, 
-#   cdmName = "eunomia", 
+# cdm <- CDMConnector::cdmFromCon(con,
+#   cdmName = "eunomia",
 #   cdmSchema = "main",
 #   writeSchema = "main"
 # )
