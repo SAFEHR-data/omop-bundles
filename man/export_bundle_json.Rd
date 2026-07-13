@@ -16,9 +16,9 @@ export_bundle_json(
 
 \item{vocab_connection}{Vocab connection object. Created using create_vocab_connection()}
 
-\item{file_path}{Character. Optional file path to save JSON}
+\item{resolve_descendants}{Logical. Whether to resolve descendants (default: FALSE)}
 
-\item{include_descendants}{Logical. Whether to include descendants (default: TRUE)}
+\item{file_path}{Character. Optional file path to save JSON}
 }
 \value{
 JSON string (invisibly if file_path provided)

@@ -1,7 +1,7 @@
 # Runs once for any test
 
 #' Create a mock vocabulary connection reading from testdata/mock_vocab
-#' 
+#'
 #' @param base_path The base path to the testdata directory
 #' @return A connection to the mock vocabulary
 create_mock_vocab_connection <- function() {
@@ -48,7 +48,7 @@ create_mock_vocab_connection <- function() {
 #'
 #' @param mock_directory The testdata directory containing the mock vocabulary files
 #' @return temporary directory containing the mock raw data files
-copy_mock_raw_data_files <- function(mock_directory="raw-data") {
+copy_mock_raw_data_files <- function(mock_directory = "raw-data") {
   # Default bundle hierarchy:
   #
   # parent_bundle

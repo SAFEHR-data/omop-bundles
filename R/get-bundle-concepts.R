@@ -231,7 +231,7 @@ get_bundle_concepts <- function(
     }
   }
 
-result |>
+  result |>
     dplyr::filter(!.data$concept_id %in% excluded_ids) |>
     dplyr::distinct()
 }

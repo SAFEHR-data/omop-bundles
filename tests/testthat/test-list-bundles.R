@@ -7,7 +7,7 @@ test_that("list_bundles returns bundles with correct columns", {
   )
   expect_true(nrow(result) > 0, info = "The dataframe should not be empty")
   expect_setequal(names(result), c("bundle_id", "bundle_name", "description", "created_date", "modified_date"))
-  
+
   # Check specific bundle exists
   parent_bundle <- dplyr::filter(result, bundle_id == "parent_bundle")
   expect_equal(nrow(parent_bundle), 1)

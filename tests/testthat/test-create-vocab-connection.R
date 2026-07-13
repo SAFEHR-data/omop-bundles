@@ -21,7 +21,6 @@ test_that("create_vocab_connection works with data frames", {
   )
 
 
-
   cdm <- list(
     concept = concept_df,
     concept_ancestor = ancestor_df

@@ -2,7 +2,7 @@
 % Please edit documentation in R/define-bundle.R
 \name{define_bundle}
 \alias{define_bundle}
-\title{Define a new bundle or update an existing bundle}
+\title{Define a new bundle or overwrite an existing bundle}
 \usage{
 define_bundle(
   bundle_id,
@@ -29,23 +29,25 @@ If is_excluded column is provided, concepts with is_excluded=TRUE will be exclud
 
 \item{child_bundles}{Character vector. IDs of child bundles to include}
 
-\item{include_descendants}{Logical. Default behavior for descendants (default: FALSE)}
+\item{include_descendants}{Logical. Default for include_descendants when not specified per concept}
 
-\item{overwrite}{Logical. Whether to overwrite existing bundle (default: FALSE)}
+\item{overwrite}{Logical. Whether to completely replace an existing bundle
+(default: FALSE). When `TRUE`, omitted `concepts` or `child_bundles`
+arguments result in an empty bundle definition for those fields.}
 }
 \value{
 Invisibly returns the bundle_id
 }
 \description{
-Defines a new bundle or updates an existing bundle in the
-  bundle system. Concepts can be specified using OMOP concept IDs or
-  vocabulary codes.
+Defines a new bundle in the bundle system, or completely
+  replaces an existing bundle when `overwrite = TRUE`. Concepts can be
+  specified using OMOP concept IDs or vocabulary codes.
 }
 \examples{
 
 # Define bundle with SNOMED-CT codes
 # define_bundle(
-#   bundle_identifier = "homeless_snomed",
+#   bundle_id = "homeless_snomed",
 #   bundle_name = "Homelessness (SNOMED)",
 #   concepts = data.frame(
 #     concept_id = c(4139934, 4053088),
@@ -57,14 +59,14 @@ Defines a new bundle or updates an existing bundle in the
 
 # Define bundle containing other bundles
 # define_bundle(
-#   bundle_identifier = "homeless_comprehensive",
+#   bundle_id = "homeless_comprehensive",
 #   bundle_name = "Comprehensive Homelessness",
 #   child_bundles = c("homeless", "sheltered_housing")
 # )
-#
+
 # Define bundle with excluded concepts
 # define_bundle(
-#   bundle_identifier = "smoking_with_exclusions",
+#   bundle_id = "smoking_with_exclusions",
 #   bundle_name = "Smoking (with exclusions)",
 #   concepts = data.frame(
 #     concept_id = c(4092281, 4222303, 4275495),
